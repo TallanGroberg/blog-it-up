@@ -1,12 +1,21 @@
-import React from 'react';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { withAuth } from './context/AuthProvider.js'
 
+import Navbar from './components/Navbar.js'
+import SignUp from './components/SignUp.js'
+import Login from './components/Login.js'
 
 const App = props => {
-  return (
+  return(
     <div>
-      blank
+      <Navbar />
+      <Switch>
+        <Route exact path='/' component={SignUp}/>
+        <Route path='/login' component={Login}/>
+      </Switch>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default withAuth(App)
