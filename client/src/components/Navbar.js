@@ -13,6 +13,7 @@ const Navbar = props => {
                 <Link to='/publishablogpost'>Publish a Blog Post</Link>
                 <Link to='/favorites'>Favorites</Link>
                 <Link to='/logout'>Logout</Link>
+                <button onClick={props.logout}>logout </button>
             </nav>
         </div>
     )

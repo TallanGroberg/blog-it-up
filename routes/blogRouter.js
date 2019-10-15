@@ -6,8 +6,6 @@ const BlogPost = require('../models/blogPost.js')
 const handleRequest = (err,req,res,next,arg) => err ? res.status(500).next(err) : res.status(200).send(arg)
 const dataBaseChange = (err,req,res,next,arg) =>  err ? res.status(500).next(err) : res.status(201).send(arg)
 
-
-
 blogRouter.get('/', (req,res,next) => {
   BlogPost.find({user: req.user._id, }, (err,blogPosts) => {
     handleRequest(err,req,res,next,blogPosts)

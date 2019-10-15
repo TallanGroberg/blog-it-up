@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect, } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { withAuth } from './context/AuthProvider.js'
-
+import axios from 'axios'
 import Navbar from './components/Navbar.js'
 import SignUp from './components/SignUp.js'
 import Login from './components/Login.js'
@@ -10,6 +10,16 @@ import Publish from './components/Publish.js'
 import Favorites from './components/Favorites.js'
 
 const App = props => {
+  const [blogPosts, setBlogPosts] = useState([])
+  console.log(props)
+
+  useEffect( () => {
+    axios.get('api/blog')
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }, [])
+
+
   return(
     <div>
       <Navbar />

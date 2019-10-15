@@ -27,6 +27,7 @@ signUpRouter.post('/signup', (req,res,next) => {
       if(err) {res.status(500).next(err)}
       
       const token = jwt.sign(user.toObject(), process.env.SECRET)
+      console.log(token)
       return res.status(201).send({success: true, user: user.toObject(), token})
     })
   })

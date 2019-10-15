@@ -1,20 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { withAuth } from '../context/AuthProvider.js'
 import { Link } from 'react-router-dom'
-
+// import useMakeBlog from './CustomHooks.js'
+import axios from 'axios'
 
 const SignUp = props => {
+    
+  
+
+    
+     
+    
+      const { name, email, password, signUp, handleChange, handleSubmit, } = props
+      
+         
+
     return(
         <div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>
                 <h1>Blog It Up!</h1>
                 <p>Sign up to view blog posts.</p>
-                <form style={{display: 'block'}}>
-                    <input placeholder="Full Name"></input>
+                <form onSubmit={handleSubmit} style={{display: 'block'}}>
+                    <input 
+                        placeholder="Full Name" 
+                        name="name"
+                        value={name}
+                        onChange={handleChange}
+                    />
                     <br />
-                    <input placeholder="Email"></input>
+                    <input placeholder="Email"
+                        name="email"
+                        value={email}
+                        onChange={handleChange}
+                    />
                     <br />
-                    <input placeholder="Password"></input>
+                    <input placeholder="Password"
+                    name="password"
+                    value={password}
+                    onChange={handleChange}
+                    />
                     <br />
                     <button>Sign up</button>
                 </form>
