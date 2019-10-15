@@ -16,7 +16,7 @@ const Login = () => {
                 </form>
             </div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>
-                <p>Don't an account?</p>
+                <p>Don't have an account?</p>
                 <Link to='/'> Sign up</Link>
             </div>
         </div>
