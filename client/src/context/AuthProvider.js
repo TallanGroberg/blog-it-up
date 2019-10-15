@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 
 const { Provider, Consumer } = React.createContext()
 
-class BlogProvider extends Component {
+class AuthProvider extends Component {
     constructor() {
         super()
         this.state = {
-            blogs: []
+            name: "",
+            email: "",
+            password: ""
         }
     } 
 
@@ -14,7 +16,11 @@ class BlogProvider extends Component {
         return ( 
             <div>
                 <Provider  
-                     value={{}}> 
+                    value={{
+                        name: this.state.name,
+                        email: this.state.email,
+                        password: this.state.password
+                    }}> 
                 { this.props.children  }
                 </Provider>
             </div>
@@ -22,10 +28,10 @@ class BlogProvider extends Component {
     }
 }
 
-export const withBlog = C => props => (
+export const withAuth = C => props => (
     <Consumer>
         { value => <C { ...value } { ...props  }/>}
     </Consumer>
 )
 
-export default BlogProvider
+export default AuthProvider
