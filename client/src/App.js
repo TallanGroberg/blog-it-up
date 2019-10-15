@@ -1,12 +1,18 @@
-import React from 'react';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
+import Navbar from './components/Navbar.js'
+import Login from './components/Login.js'
 
-const App = props => {
-  return (
+const App = () => {
+  return(
     <div>
-      blank
+      <Navbar />
+      <Switch>
+        <Route exact path='/' component={Login}/>
+      </Switch>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
