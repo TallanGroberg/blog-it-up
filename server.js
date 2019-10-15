@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost:27017/blogitupdb', {
 
 //Routes 
 
-
+app.use('/api/blog', require('./routes/blogRouter.js'))
 app.use('/user', require('./routes/signUpRouter.js'))
 app.use('/auth', require('./routes/userRouter.js'))
 

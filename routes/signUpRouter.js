@@ -39,6 +39,7 @@ signUpRouter.post('/login', (req,res,next) => {
         res.status(403).next(new Error('email or password is incorrect'))
       }
       const token = jwt.sign(user.toObject(), process.env.SECRET)
+      console.log(token)
       return res.send({token: token, user: user.toObject(), success: true, })
     })
 })
