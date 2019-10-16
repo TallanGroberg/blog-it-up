@@ -27,10 +27,18 @@ class AuthProvider extends Component {
     } 
 
     componentDidMount() {
-        blogPostAxios.get('/api/blog/').then( res => {this.setState({
+        blogPostAxios.get('/api/blog/')
+        .then( res => {this.setState({
             blogPosts: [ res.data]
-        }) }).catch(err => console.log(err)) }
+        }) })
+        .catch(err => console.log(err)) 
+    }
         
+    // getAllBlogs = (user) => {
+    //     axios.get('/api/blog/')
+    //     .then(res => console.log(res.data))
+    //     .catch(err => console.log(err))
+    // }
         
         // start of auth features ==========================>
     logout = () => {
@@ -98,7 +106,7 @@ class AuthProvider extends Component {
 
 
     render() {
-       
+       console.log(this.state)
         return ( 
             <div>
                 <Provider  

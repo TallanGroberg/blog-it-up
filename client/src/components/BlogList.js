@@ -31,7 +31,7 @@ class BlogList extends Component {
     render() {
         return (
             <div>
-
+                hello
                 {/* { this.state.blogs.map(blog => <h1>{blog.title}</h1>)} */}
             </div>
         )
