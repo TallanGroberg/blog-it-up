@@ -26,9 +26,9 @@ signUpRouter.post('/signup', (req,res,next) => {
       newUser.save( (err,user) => {
       if(err) {res.status(500).send(err)}
       
-      const token = jwt.sign(user.toObject(), process.env.SECRET)
+      const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
       console.log('token',token)
-      return res.status(201).send({success: true, user: user.toObject(), token})
+      return res.status(201).send({success: true, user: user.withoutPassword(), token})
       console.log('user password', user.password)
     })
   })
@@ -43,9 +43,9 @@ signUpRouter.post('/login', (req,res,next) => {
       if(err) {return res.status(500).send(err)};
       if(!match) {return res.status(401).send(new Error('email or password is incorrect'))}
 
-      const token = jwt.sign(user.toObject(), process.env.SECRET)
+      const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
      
-      return res.send({token: token, user: user.toObject(), success: true, })
+      return res.send({token: token, user: user.withoutPassword(), success: true, })
     })
   })
 })

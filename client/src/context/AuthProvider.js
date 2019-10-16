@@ -25,6 +25,7 @@ class AuthProvider extends Component {
 
         }
     } 
+    //may have to make the token save to token state
     
     componentDidMount() {
         blogPostAxios.get('/api/blog/')
@@ -127,7 +128,7 @@ logout = () => {
     }
     
     render() {
-        console.log(this.state.blogPosts)
+        console.log(this.state.user)
         return ( 
             <div>
                 <Provider  
