@@ -24,11 +24,12 @@ signUpRouter.post('/signup', (req,res,next) => {
     
     const newUser = new User(req.body)
       newUser.save( (err,user) => {
-      if(err) {res.status(500).next(err)}
+      if(err) {res.status(500).send(err)}
       
       const token = jwt.sign(user.toObject(), process.env.SECRET)
-      console.log(token)
+      console.log('token',token)
       return res.status(201).send({success: true, user: user.toObject(), token})
+      console.log('user password', user.password)
     })
   })
 })
