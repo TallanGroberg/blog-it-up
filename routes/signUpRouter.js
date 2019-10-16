@@ -28,8 +28,8 @@ signUpRouter.post('/signup', (req,res,next) => {
       
       const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
       console.log('token',token)
-      return res.status(201).send({success: true, user: user.withoutPassword(), token})
       console.log('user password', user.password)
+      return res.status(201).send({success: true, user: user.withoutPassword(), token})
     })
   })
 })

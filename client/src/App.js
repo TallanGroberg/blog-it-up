@@ -9,7 +9,7 @@ import BlogList from './components/BlogList.js'
 import Publish from './components/Publish.js'
 import Favorites from './components/Favorites.js'
 
-// add login log out to nav bar 
+
 // change password input to password field 
 // push logged in users to home 
 
@@ -19,7 +19,7 @@ const App = props => {
 
   return(
     <div>
-      <Navbar />
+     <Route render={ rProps => <Navbar {...rProps} />} />
       <Switch>
         <Route exact path='/' component={SignUp}/>
         <Route path='/login' component={Login}/>

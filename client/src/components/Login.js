@@ -29,13 +29,14 @@ const Login = (props) => {
 
                     <input 
                     placeholder="Password"
+                    type='password'
                     name="password"
                     value={password}
                     onChange={handleChange}
                     />
 
                     <br />
-                    <button>Sign up</button>
+                    <button onClick={localStorage.getItem('token') !== null ? props.history.push('/allblogposts') : null}>login</button>
                 </form>
             </div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>
