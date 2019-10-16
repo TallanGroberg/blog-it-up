@@ -16,7 +16,7 @@ const Publish = (props) => {
         e.preventDefault()
         blogPostAxios.post('/blog', inputs)
     }
-    console.log(inputs)
+
 
     const handleChange = (e) => {
         const {name, value} = e.target
