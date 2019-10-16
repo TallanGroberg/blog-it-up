@@ -14,13 +14,13 @@ const SignUp = props => {
       const { name, email, password, signUp, handleChange, handleSubmit, } = props
       
          
-
+    console.log(props)
     return(
         <div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>
                 <h1>Blog It Up!</h1>
                 <p>Sign up to view blog posts.</p>
-                <form onSubmit={handleSubmit} style={{display: 'block'}}>
+                <form  onSubmit={ handleSubmit} style={{display: 'block'}}>
                     <input 
                         placeholder="Full Name" 
                         name="name"
@@ -35,12 +35,13 @@ const SignUp = props => {
                     />
                     <br />
                     <input placeholder="Password"
+                    type='password'
                     name="password"
                     value={password}
                     onChange={handleChange}
                     />
                     <br />
-                    <button>Sign up</button>
+                    <button onClick={localStorage.getItem('token') !== null ? props.history.push('/allblogposts') : null}>Sign up</button>
                 </form>
             </div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>
