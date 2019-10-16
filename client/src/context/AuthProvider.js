@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-const blogPostAxios = axios.create()
+import {withRouter} from 'react-router-dom'
 
+const blogPostAxios = axios.create()
 
 blogPostAxios.interceptors.request.use((config)=>{
     const token = localStorage.getItem("token");
@@ -12,8 +13,8 @@ blogPostAxios.interceptors.request.use((config)=>{
 const { Provider, Consumer } = React.createContext()
 
 class AuthProvider extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             user: JSON.parse(localStorage.getItem("user")) || {},
             token:  localStorage.getItem("token") || "",
@@ -27,12 +28,11 @@ class AuthProvider extends Component {
     } 
 
     componentDidMount() {
-        blogPostAxios.get('/api/blog/')
-        .then( res => {this.setState({
+        blogPostAxios.get('/api/blog/').then( res => { console.log( 'res from context',res)
+            this.setState({
             blogPosts: [ res.data]
         }) })
-        .catch(err => console.log(err)) 
-    }
+        .catch(err => console.log(err)) }
         
     // getAllBlogs = (user) => {
     //     axios.get('/api/blog/')
@@ -77,7 +77,6 @@ class AuthProvider extends Component {
             name: '',
             email: '',
             password: '',
-            
         })) }
     
     
@@ -106,7 +105,7 @@ class AuthProvider extends Component {
 
 
     render() {
-       console.log(this.state)
+        
         return ( 
             <div>
                 <Provider  
@@ -121,6 +120,7 @@ class AuthProvider extends Component {
                         signUp: this.signUp,
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
+                        historyPush: this.props.history.push,
                     }}> 
                 { this.props.children  }
                 </Provider>
@@ -135,4 +135,4 @@ export const withAuth = C => props => (
     </Consumer>
 )
 
-export default AuthProvider
+export default withRouter(AuthProvider)

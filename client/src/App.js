@@ -8,6 +8,7 @@ import Login from './components/Login.js'
 import BlogList from './components/BlogList.js'
 import Publish from './components/Publish.js'
 import Favorites from './components/Favorites.js'
+import ProtectedRoute from './auth/ProtectedRoute'
 
 
 // change password input to password field 
@@ -19,6 +20,7 @@ const App = props => {
 
 
 
+  
   return(
     <div>
      <Route render={ rProps => <Navbar {...rProps} />} />
@@ -27,6 +29,7 @@ const App = props => {
         <Route path='/login' component={Login}/>
         <Route path='/allblogposts' component={BlogList}/>
         <Route path='/publishablogpost' component={Publish}/>
+      
         <Route path='/favorites' component={Favorites}/>
       </Switch>
     </div>

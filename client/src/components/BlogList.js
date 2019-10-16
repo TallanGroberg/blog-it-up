@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { withAuth } from '../context/AuthProvider.js'
 import axios from 'axios';
 
+<<<<<<< HEAD
+=======
+
+const BlogList = props => {
+>>>>>>> 08f2aab718e53876063d3d6d21f1354f733f08b4
 
 //in this section we will map through each blog and give it its own individual component because we want users to click on any blog to read the entire blog post(do not include the description section until the user clicks on the individual blog post) 
 
@@ -37,6 +42,15 @@ class BlogList extends Component {
         )
     }
 
+<<<<<<< HEAD
+=======
+    return (
+        <div>
+     
+            all blog post here
+        </div>
+    )
+>>>>>>> 08f2aab718e53876063d3d6d21f1354f733f08b4
 }
 
 export default withAuth(BlogList)
