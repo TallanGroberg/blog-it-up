@@ -25,60 +25,36 @@ class AuthProvider extends Component {
 
         }
     } 
-    //may have to make the token save to token state
-    
+
     componentDidMount() {
-        blogPostAxios.get('/api/blog/')
-        .then( res => {
-        this.setState({
+        blogPostAxios.get('/api/blog/').then( res => {this.setState({
             blogPosts: [ res.data]
-        })
-    })
-    .catch(err => console.log(err))
-}
-
-
-logout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    this.setState(
-        {
-            user: {},
-            token: ""
-        }
-        )
-    }
+        }) }).catch(err => console.log(err)) }
+        
+        
+        // start of auth features ==========================>
+    logout = () => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        this.setState(
+        {user: {},
+        token: ""})}
     
     login = (user) => {
-        axios.post("/user/login", user)
-        .then(res => {
+        axios.post("/user/login", user).then(res => {
             const { token, user } = res.data;
             localStorage.setItem("token", token)
             localStorage.setItem("user", JSON.stringify(user))
-            this.setState({
-                user,
-                token,
-            });
-        })
-    }
+            this.setState({ user,token,});  })}
     
     
     signUp = (user) => {
-        axios.post(`user/signup`, user)
-        .then(res => {
+        axios.post(`user/signup`, user).then(res => {
             const { token, user, } = res.data
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
-            
-            this.setState({
-                token,
-                user,
-            })
-            
-            return res
-        })
-        .catch(err => console.log(err))
-    }
+            this.setState({token,user,})
+            return res}).catch(err => console.log(err)) }
     
     handleSubmitForLogin = (e) => {
         e.preventDefault(e)
@@ -86,18 +62,15 @@ logout = () => {
             token: this.state.token,
             name: this.state.name,
             email: this.state.email, 
-            password:  this.state.password
-        }
-        this.login(user)
-        
+            password:  this.state.password}
+                this.login(user)
         this.setState( prev => ({
             user: {...prev.user, user},
             name: '',
             email: '',
             password: '',
             
-        }))
-    }
+        })) }
     
     
     handleSubmit = (e) => {
@@ -107,26 +80,23 @@ logout = () => {
             name: this.state.name,
             email: this.state.email, 
             password:  this.state.password
-        }
-        this.signUp(user)
-        
+        }  
+            this.signUp(user)
         this.setState( prev => ({
             user: {...prev.user, user},
             name: '',
             email: '',
             password: '',
             
-        }))
-    }
-    
+        }))  }
     
     handleChange = (e) => {
         const { name, value } = e.target
-        this.setState({ 
-            [name]: value
-        })
-    }
-    
+        this.setState({ [name]: value}) }
+    //end of auth features ==========================
+
+
+
     render() {
        
         return ( 
