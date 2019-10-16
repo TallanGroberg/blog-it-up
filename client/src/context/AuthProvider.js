@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+const blogPostAxios = axios.create()
+
+
+blogPostAxios.interceptors.request.use((config)=>{
+    const token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+})
+
 const { Provider, Consumer } = React.createContext()
 
 class AuthProvider extends Component {
@@ -12,33 +21,46 @@ class AuthProvider extends Component {
             email: '',
             password: '',
 
+            blogPosts: []
+
         }
     } 
+    
+    componentDidMount() {
+        blogPostAxios.get('/api/blog/')
+        .then( res => { console.log('res data', res.data)
+        debugger
+        this.setState({
+            blogPosts: [ res.data]
+        })
+    })
+    .catch(err => console.log(err))
+}
 
-    logout = () => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        console.log(this.state)
-        this.setState(
+
+logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    this.setState(
         {
             user: {},
             token: ""
         }
-    )
-}
-
+        )
+    }
+    
     login = (user) => {
         axios.post("/user/login", user)
-            .then(res => {
-                const { token, user } = res.data;
-                localStorage.setItem("token", token)
-                localStorage.setItem("user", JSON.stringify(user))
-                this.setState({
-                    user,
-                    token,
-                });
-            })
-        }
+        .then(res => {
+            const { token, user } = res.data;
+            localStorage.setItem("token", token)
+            localStorage.setItem("user", JSON.stringify(user))
+            this.setState({
+                user,
+                token,
+            });
+        })
+    }
     
     
     signUp = (user) => {
@@ -56,7 +78,7 @@ class AuthProvider extends Component {
         .catch(err => console.log(err))
         alert(user)
     }
-
+    
     handleSubmitForLogin = (e) => {
         e.preventDefault(e)
         const user = { 
@@ -66,7 +88,7 @@ class AuthProvider extends Component {
             password:  this.state.password
         }
         this.login(user)
-
+        
         this.setState( prev => ({
             user: {...prev.user, user},
             name: '',
@@ -75,7 +97,7 @@ class AuthProvider extends Component {
             
         }))
     }
-
+    
     
     handleSubmit = (e) => {
         e.preventDefault()
@@ -86,7 +108,7 @@ class AuthProvider extends Component {
             password:  this.state.password
         }
         this.signUp(user)
-
+        
         this.setState( prev => ({
             user: {...prev.user, user},
             name: '',
@@ -96,7 +118,7 @@ class AuthProvider extends Component {
         }))
     }
     
-
+    
     handleChange = (e) => {
         const { name, value } = e.target
         this.setState({ 
@@ -105,7 +127,7 @@ class AuthProvider extends Component {
     }
     
     render() {
-        console.log(this.state.user)
+        console.log(this.state.blogPosts)
         return ( 
             <div>
                 <Provider  

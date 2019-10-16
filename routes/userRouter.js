@@ -9,6 +9,7 @@ const dataBaseChange = (err,req,res,arg) =>  err ? res.status(500).next(err) : r
 
 userRouter.get('/', (req,res) => {
   User.find( (err, users) => {
+    console.log(users)
    handleRequest(err,req,res,users)
   })
 })

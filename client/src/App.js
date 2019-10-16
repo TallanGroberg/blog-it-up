@@ -10,14 +10,7 @@ import Publish from './components/Publish.js'
 import Favorites from './components/Favorites.js'
 
 const App = props => {
-  const [blogPosts, setBlogPosts] = useState([])
-  console.log(props)
 
-  useEffect( () => {
-    axios.get('api/blog')
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-  }, [])
 
 
   return(
