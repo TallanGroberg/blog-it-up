@@ -37,13 +37,17 @@ signUpRouter.post('/signup', (req,res,next) => {
 signUpRouter.post('/login', (req,res,next) => {
     User.findOne({name: req.body.name.toLowerCase()}, (err,user) => {
       if(err) {return next(err)}
-      if(!user || user.password !== req.body.password) {
-        res.status(403).next(new Error('email or password is incorrect'))
-      }
+      if(!user) {return res.status(403).next(new Error('email or password is incorrect'))}
+
+      user.checkPassword(req.body.password, (err,match) => {
+      if(err) {return res.status(500).send(err)};
+      if(!match) {return res.status(401).send(new Error('email or password is incorrect'))}
+
       const token = jwt.sign(user.toObject(), process.env.SECRET)
-      console.log(token)
+     
       return res.send({token: token, user: user.toObject(), success: true, })
     })
+  })
 })
 
 
