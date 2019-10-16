@@ -29,7 +29,7 @@ class AuthProvider extends Component {
     componentDidMount() {
         blogPostAxios.get('/api/blog/')
         .then( res => { console.log('res data', res.data)
-        debugger
+        // debugger
         this.setState({
             blogPosts: [ res.data]
         })
@@ -127,7 +127,7 @@ logout = () => {
     }
     
     render() {
-        console.log(this.state.blogPosts)
+        // console.log(this.state.blogPosts)
         return ( 
             <div>
                 <Provider  

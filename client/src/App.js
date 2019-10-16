@@ -11,6 +11,8 @@ import Favorites from './components/Favorites.js'
 
 const App = props => {
 
+  // console.log(props)
+
 
 
   return(

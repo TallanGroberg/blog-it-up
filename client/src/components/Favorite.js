@@ -10,4 +10,4 @@ const Favorite = props => {
     )
 }
 
-export default withAuth(Favorites)
+export default withAuth(Favorite)
