@@ -100,7 +100,7 @@ class AuthProvider extends Component {
 
 
     render() {
-        
+        console.log('blogpost', this.state.blogPosts)
         return ( 
             <div>
                 <Provider  
@@ -115,7 +115,7 @@ class AuthProvider extends Component {
                         signUp: this.signUp,
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
-                        historyPush: this.props.history.push,
+                        RouterProps: this.props,
                     }}> 
                 { this.props.children  }
                 </Provider>

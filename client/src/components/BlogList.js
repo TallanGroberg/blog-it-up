@@ -8,8 +8,7 @@ const BlogList = props => {
 
     return (
         <div>
-     
-            all blog post here
+            
         </div>
     )
 }

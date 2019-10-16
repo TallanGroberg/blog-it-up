@@ -14,7 +14,7 @@ const Publish = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        blogPostAxios.post('/blog', inputs)
+        blogPostAxios.post('/api/blog', inputs)
     }
 
 
@@ -22,6 +22,8 @@ const Publish = (props) => {
         const {name, value} = e.target
         setInputs(inputs =>  ({...inputs, [name]: value, }))
     }
+
+   
 
 
     return(

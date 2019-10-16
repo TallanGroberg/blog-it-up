@@ -21,14 +21,15 @@ const App = props => {
   
   return(
     <div>
+    
      <Route render={ rProps => <Navbar {...rProps} />} />
       <Switch>
         <Route exact path='/' component={SignUp}/>
         <Route path='/login' component={Login}/>
-        <Route path='/allblogposts' component={BlogList}/>
-        <Route path='/publishablogpost' component={Publish}/>
+        <ProtectedRoute path='/allblogposts' component={BlogList}/>
+        <ProtectedRoute path='/publishablogpost' component={Publish}/>
       
-        <Route path='/favorites' component={Favorites}/>
+        <ProtectedRoute path='/favorites' component={Favorites}/>
       </Switch>
     </div>
   )
