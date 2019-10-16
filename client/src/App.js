@@ -1,7 +1,7 @@
 import React, { useState, useEffect, } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { withAuth } from './context/AuthProvider.js'
-import axios from 'axios';
+import axios from 'axios'
 import Navbar from './components/Navbar.js'
 import SignUp from './components/SignUp.js'
 import Login from './components/Login.js'
