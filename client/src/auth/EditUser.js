@@ -12,7 +12,7 @@ const EditUser = (props) => {
   const { handleEdit,} = useFormHandler()
 
  const cleanToken = (token) => {
-  return token.split(' ').join('').split(".").join('').split(",").join('')
+  return token.split(' ').join('').split(".").join('').split(",").join('').split('_').join('')
  }
 
  console.log(cleanToken(token))
