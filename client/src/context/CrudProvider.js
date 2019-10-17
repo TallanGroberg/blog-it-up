@@ -15,9 +15,9 @@ class CrudProvider extends Component {
     getBlogPosts = () => {
         blogPostAxios.get('/api/blog/')
         .then( res => { 
-            this.setState({
-                blogPosts: [res.data]
-            }) 
+            this.setState(prev => ({
+                blogPosts: [...res.data]
+            })) 
         })
         .catch(err => console.log(err)) 
         
@@ -25,7 +25,7 @@ class CrudProvider extends Component {
 
     deleteBlogPost = (_id) => {
         blogPostAxios.delete(`/api/blog/${_id}`)
-
+        
         this.setState(prev => {
             const filteredArray = prev.blogPosts.filter( blog => {
                 return _id !== blog._id

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { withAuth } from './context/AuthProvider.js'
+import { withAuth, blogPostAxios } from './context/AuthProvider.js'
 import ProtectedRoute from './auth/ProtectedRoute'
 import Navbar from './components/Navbar.js'
 import Profile from './auth/Profile.js'
@@ -13,11 +13,10 @@ import { withCrud } from './context/CrudProvider.js'
 
 
 
-
 const App = props => {
   const { token } = props
 
-
+  console.log('blog post axios in app.js',blogPostAxios)
   
   return(
     <div>

@@ -2,12 +2,32 @@ import React, {useState} from 'react';
 import {withAuth} from '../context/AuthProvider'
 import useFormHandler from './CustomHooks'
 
+//make a method to regrex all the whitespace out of a token 
+
 const EditUser = (props) => {
   const [hide, setHide] = useState(true)
+  const [inputs, setInputs] = useState({})
 
-  const {toggler} = props
-  const {inputs, handleSubmit, handleChange} = useFormHandler()
+  const {toggler, token} = props
+  const { handleEdit,} = useFormHandler()
 
+ const cleanToken = (token) => {
+  return token.split(' ').join('').split(".").join('').split(",").join('').split('_').join('')
+ }
+
+ console.log(cleanToken(token))
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    handleEdit(token, inputs)
+  }
+  
+  const handleChange = (e) => {
+    const {name, value} = e.target
+    setInputs(inputs =>  ({...inputs, [name]: value, }))
+}
 
   const passwordHider = () => {
     setHide(hide => (!hide))

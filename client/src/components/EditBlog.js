@@ -14,6 +14,8 @@ const EditBlog = (props) => {
 
     props.sendEdits(_id, edits)
   }
+
+  console.log('_id is in editblog', _id)
   
   const handleChange = (e) => {
     const {name, value} = e.target

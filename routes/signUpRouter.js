@@ -13,7 +13,7 @@ const secret = process.env.SECRET
 //   })
 // })
 
-console.log()
+
 
 signUpRouter.post('/signup', (req,res,next) => {
 
