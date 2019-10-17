@@ -20,7 +20,7 @@ const Blog = props => {
     const toggler = () => {
         setToggle(!toggle )
     }
-
+    //move to context after context is set up for it
     const deleteBlogPost = (_id) => {
         blogPostAxios.delete(`/api/blog/${_id}`)
     }

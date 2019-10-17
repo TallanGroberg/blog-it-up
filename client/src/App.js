@@ -11,8 +11,7 @@ import Publish from './components/Publish.js'
 import Favorites from './components/Favorites.js'
 
 
-// change password input to password field 
-// push logged in users to home 
+
 
 const App = props => {
   const { token } = props

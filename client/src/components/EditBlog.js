@@ -1,38 +1,30 @@
 import React, {useState,} from 'react';
-import axios from 'axios'
+
 import {withAuth} from "../context/AuthProvider"
 
-const blogPostAxios = axios.create()
-blogPostAxios.interceptors.request.use((config)=>{
-  const token = localStorage.getItem("token");
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
-})
+
 
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
-
-  const {_id, } = props.post
-  console.log('props in edit blog',props)
+    const {_id, } = props.post
 
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.toggler()
-
-    props.sendEdits(_id, edits)
+      props.toggler()
+        props.sendEdits(_id, edits)
   }
 
   
   const handleChange = (e) => {
     const {name, value} = e.target
-    setEdits(edits => ({...edits, [name]: value}))
+      setEdits(edits => ({...edits, [name]: value}))
   }
 
   
   return (
     <div>
-         <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <input placeholder="Title"
                 name='title'
                 value={edits.title}
@@ -63,5 +55,8 @@ const EditBlog = (props) => {
     </div>
   );
 };
+
+
+//
 
 export default withAuth(EditBlog);
