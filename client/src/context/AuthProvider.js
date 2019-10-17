@@ -28,10 +28,12 @@ class AuthProvider extends Component {
     } 
 
     componentDidMount() {
-        blogPostAxios.get('/api/blog/').then( res => { console.log( 'res from context',res)
-            this.setState({
-            blogPosts: [ res.data]
-        }) })
+        blogPostAxios.get('/api/blog/')
+        .then( res => { 
+            this.setState(prev => ({
+            blogPosts: [...prev.blogPosts, ...res.data]
+        })) 
+        })
         .catch(err => console.log(err)) }
         
         
@@ -105,6 +107,7 @@ class AuthProvider extends Component {
             <div>
                 <Provider  
                     value={{
+                        blogPosts: this.state.blogPosts,
                         user: this.state.user,
                         token: this.state.token,
                         name: this.state.name,

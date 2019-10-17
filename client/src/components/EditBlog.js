@@ -3,11 +3,14 @@ import React, {useState,} from 'react';
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, _id, edits) => {
     e.preventDefault()
-    axios.put(`/api/blog${_id}`, edits)
+    sendEdits(_id, edits)
   }
-
+const sendEdits = (_id, edits) => {
+  axios.put(`/api/blog/${_id}`, edits)
+}
+  
   const handleChange = (e) => {
     const {name, value} = e.target
     setEdits(edits => ({...edits, [name]: value}))
