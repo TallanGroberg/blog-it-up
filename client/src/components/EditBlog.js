@@ -1,32 +1,19 @@
-import React, {useState,} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
+import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
+import { withCrud } from '../context/CrudProvider.js'
 
-const blogPostAxios = axios.create()
-blogPostAxios.interceptors.request.use((config)=>{
-  const token = localStorage.getItem("token");
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
-})
 
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
-
-  
 
   
   const handleSubmit = (e) => {
     e.preventDefault()
     props.toggler()
 
-    sendEdits(_id, edits)
+    props.sendEdits(_id, edits)
   }
-const sendEdits = (_id, edits,) => {
- 
- 
-  blogPostAxios.put(`/api/blog/${_id}`, edits)
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
-}
   
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -69,4 +56,4 @@ const sendEdits = (_id, edits,) => {
   );
 };
 
-export default EditBlog;
+export default withAuth(withCrud(EditBlog))

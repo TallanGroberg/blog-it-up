@@ -8,6 +8,7 @@ import BlogList from './components/BlogList.js'
 import Publish from './components/Publish.js'
 import Favorites from './components/Favorites.js'
 import ProtectedRoute from './auth/ProtectedRoute'
+import { withCrud } from './context/CrudProvider.js'
 
 
 // change password input to password field 
@@ -34,4 +35,4 @@ const App = props => {
   )
 }
 
-export default withAuth(App)
+export default withAuth(withCrud(App))
