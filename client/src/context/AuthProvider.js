@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-const blogPostAxios = axios.create()
+
+
+export const blogPostAxios = axios.create()
 
 
 blogPostAxios.interceptors.request.use((config)=>{

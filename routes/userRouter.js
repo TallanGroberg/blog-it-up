@@ -4,13 +4,14 @@ const User = require('../models/user')
 const jwt = require("jsonwebtoken");
 
 
-const handleRequest = (err,req,res, arg) => err ? res.status(500).next(err) : res.status(200).send(arg)
-const dataBaseChange = (err,req,res,arg) =>  err ? res.status(500).next(err) : res.status(201).send(arg)
+const handleRequest = (err,req,res,next, arg) => err ? res.status(500).next(err) : res.status(200).send(arg)
+const dataBaseChange = (err,req,res,next,arg) =>  err ? res.status(500).next(err) : res.status(201).send(arg)
 
-userRouter.get('/', (req,res) => {
+userRouter.get('/', (req,res,next) => {
+
   User.find( (err, users) => {
-    console.log(users)
    handleRequest(err,req,res,users)
+   console.log(user)
   })
 })
 
@@ -26,9 +27,10 @@ userRouter.delete('/:_id', (req,res,next) => {
   })
 })
 
-userRouter.put('/:_id', (req,res,next) => {
-  User.findByIdAndUpdate(req.params._id, req.body, {new: true}, (err, user) => {
-    dataBaseChange(err,req,res,user)
+userRouter.put('/:token', (req,res,next) => {
+  User.findByIdAndUpdate(req.params.token, req.body, {new: true}, (err, user) => {
+    dataBaseChange(err,req,res,next,user)
+    console.log(user)
   })
 })
 

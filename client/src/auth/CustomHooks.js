@@ -1,9 +1,10 @@
 import {useState} from 'react';
+import { blogPostAxios} from '../context/AuthProvider'
 import axios from 'axios'
 
 
 
-const blogPostAxios = axios.create()
+
 
 
 blogPostAxios.interceptors.request.use((config)=>{
@@ -15,9 +16,8 @@ const useFormHandler = () => {
   const [inputs, setInputs] = useState({})
 
 
-  const handleSubmit = (_id, inputs) => {
-
-    blogPostAxios.put(`/api/blog${_id}`, inputs)
+  const handleEdit = (token, inputs) => {
+    blogPostAxios.put(`/auth/${token}`, inputs)
 }
 
 const handleChange = (e) => {
@@ -28,7 +28,7 @@ const handleChange = (e) => {
 return {
         inputs,
         handleChange,
-        handleSubmit
+        handleEdit
       }
 }
 
