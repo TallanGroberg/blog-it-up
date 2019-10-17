@@ -27,15 +27,24 @@ class AuthProvider extends Component {
 
     
     getBlogPosts = () => {
-        return blogPostAxios.get('/api/blog/')
+        blogPostAxios.get('/api/blog/')
         .then( res => { 
-            this.setState(prev => ({
-                blogPosts: [...prev.blogPosts, ...res.data]
-            })) 
-            return res
+            this.setState(prev => {
+                return {blogPosts: [ ...res.data]}
+            }) 
         })
         .catch(err => console.log(err)) 
-        
+        this.setState(prev => ({
+            
+        }))
+    }
+    sendEdits =  (_id, edits,) => {
+        blogPostAxios.put(`/api/blog/${_id}`, edits)
+        .then(res => {
+            this.setState(prev => ({
+                blogPosts: prev.blogPosts.map( blog => blog._id === _id ?  res.data : blog )
+            }))
+        })
     }
            
 
@@ -126,6 +135,7 @@ class AuthProvider extends Component {
                         logout: this.logout,
                         RouterProps: this.props,
                         getBlogPosts: this.getBlogPosts,
+                        sendEdits: this.sendEdits,
                     }}> 
                 { this.props.children  }
                 </Provider>

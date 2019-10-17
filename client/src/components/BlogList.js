@@ -1,4 +1,4 @@
-import React, {useState, useEffect,} from 'react'
+import React, { useEffect, } from 'react'
 import { withAuth } from '../context/AuthProvider.js'
 import Blog from './Blog'
 
@@ -12,11 +12,11 @@ const BlogList = props => {
     
 
 
-    console.log('blog post in blogList', blogPosts)
 
 
     
-        
+ 
+   
 
     return (
         <div>

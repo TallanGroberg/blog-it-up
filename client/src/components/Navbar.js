@@ -18,6 +18,7 @@ const Navbar = props => {
                 <Link to='/allblogposts'>All Blog Posts</Link>
                 <Link to='/publishablogpost'>Publish a Blog Post</Link>
                 <Link to='/favorites'>Favorites</Link>
+                <Link to='/profile'>Profile</Link>
                 <button  onClick={logout}>{localStorage.getItem('token') !== null ? 'logout' :  'login' } </button>
             </nav>
         </div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import {withAuth} from '../context/'
+import {withAuth} from '../context/AuthProvider'
 
 const Profile = (props) => {
+  console.log(props)
   return (
     <div>
       
@@ -9,4 +10,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);
