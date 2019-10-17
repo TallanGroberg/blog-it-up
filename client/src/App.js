@@ -8,20 +8,28 @@ import Login from './components/Login.js'
 import BlogList from './components/BlogList.js'
 import Publish from './components/Publish.js'
 import Favorites from './components/Favorites.js'
+import ProtectedRoute from './auth/ProtectedRoute'
+
+
+// change password input to password field 
+// push logged in users to home 
 
 const App = props => {
 
 
 
+  
   return(
     <div>
-      <Navbar />
+    
+     <Route render={ rProps => <Navbar {...rProps} />} />
       <Switch>
         <Route exact path='/' component={SignUp}/>
         <Route path='/login' component={Login}/>
-        <Route path='/allblogposts' component={BlogList}/>
-        <Route path='/publishablogpost' component={Publish}/>
-        <Route path='/favorites' component={Favorites}/>
+        <ProtectedRoute path='/allblogposts' component={BlogList}/>
+        <ProtectedRoute path='/publishablogpost' component={Publish}/>
+      
+        <ProtectedRoute path='/favorites' component={Favorites}/>
       </Switch>
     </div>
   )

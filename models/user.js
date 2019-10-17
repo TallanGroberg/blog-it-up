@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
+
 const userSchema = new Schema({
   name: {
     type: String,
@@ -35,5 +36,10 @@ userSchema.methods.checkPassword = function(passwordAttempt, callback) {
   })
 }
 
+userSchema.methods.withoutPassword = function() {
+  const user = this.toObject()
+  delete user.password
+  return user
+}
 
 module.exports = mongoose.model('User', userSchema)

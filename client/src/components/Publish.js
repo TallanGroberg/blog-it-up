@@ -14,14 +14,16 @@ const Publish = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        blogPostAxios.post('/blog', inputs)
+        blogPostAxios.post('/api/blog', inputs)
     }
-    console.log(inputs)
+
 
     const handleChange = (e) => {
         const {name, value} = e.target
         setInputs(inputs =>  ({...inputs, [name]: value, }))
     }
+
+   
 
 
     return(
