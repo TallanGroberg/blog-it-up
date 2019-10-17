@@ -4,7 +4,7 @@ const express = require("express")
 const User = require("../models/user");
 const signUpRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const secret = process.env.SECRET || 'super secrete thing'
+const secret = process.env.SECRET 
 
 // userRouter.post('/', (req,res,next) => {
 //   const newUser = new User(req.body)
@@ -21,7 +21,10 @@ signUpRouter.post('/signup', (req,res,next) => {
     
     if (err) {res.status(500).next(err)}
 
-    if (existingUser !== null) {res.status(400).next(new Error('user name already exists'))}
+    if (existingUser !== null) {
+      res.status(400)
+      return next(new Error('user name already exists'))
+    }
     
     const newUser = new User(req.body)
       newUser.save( (err,user) => {

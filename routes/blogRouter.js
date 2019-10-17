@@ -17,6 +17,7 @@ blogRouter.get('/', (req,res,next) => {
 })
 
 blogRouter.post('/', (req,res,next) => {
+  
   const newBlogPost = new BlogPost(req.body)
   
   newBlogPost.user = req.user._id

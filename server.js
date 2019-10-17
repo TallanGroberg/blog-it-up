@@ -1,14 +1,14 @@
 const express = require('express')
 const app = express()
+require("dotenv").config();
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const expressJwt = require('express-jwt')
 const PORT = process.env.PORT || 4444
-const secret = process.env.SECRET || 'super secrete thing'
+
 const path = require("path")
 
 
-require("dotenv").config();
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, "client", "build")))
@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "client", "build")))
 
 //text if this works 
 
-app.use('/api', expressJwt({secret: secret}))
+app.use('/api', expressJwt({secret: process.env.SECRET}))
 
 
 

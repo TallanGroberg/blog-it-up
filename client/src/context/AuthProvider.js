@@ -26,14 +26,19 @@ class AuthProvider extends Component {
         }
     } 
 
-    componentDidMount() {
-        blogPostAxios.get('/api/blog/')
+    
+    getBlogPosts = () => {
+        return blogPostAxios.get('/api/blog/')
         .then( res => { 
             this.setState(prev => ({
-            blogPosts: [...prev.blogPosts, ...res.data]
-        })) 
+                blogPosts: [...prev.blogPosts, ...res.data]
+            })) 
+            return res
         })
-        .catch(err => console.log(err)) }
+        .catch(err => console.log(err)) 
+        
+    }
+           
 
 
 
@@ -52,21 +57,24 @@ class AuthProvider extends Component {
             const { token, user } = res.data;
             localStorage.setItem("token", token)
             localStorage.setItem("user", JSON.stringify(user))
-            this.setState({ user,token,});  })}
+            this.setState({ user,token,}); 
+         })}
     
     
     signUp = (user) => {
-        axios.post(`user/signup`, user).then(res => {
+        //make this thenable return axios
+       axios.post(`user/signup`, user).then(res => {
             const { token, user, } = res.data
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
             this.setState({token,user,})
-            return res}).catch(err => console.log(err)) }
+            //makes it so this function can return data
+            //return res make this tenable receive data
+            }).catch(err => console.log(err)) }
     
     handleSubmitForLogin = (e) => {
         e.preventDefault(e)
         const user = { 
-            token: this.state.token,
             name: this.state.name,
             email: this.state.email, 
             password:  this.state.password}
@@ -82,7 +90,6 @@ class AuthProvider extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const user = { 
-            token: this.state.token,
             name: this.state.name,
             email: this.state.email, 
             password:  this.state.password
@@ -104,7 +111,7 @@ class AuthProvider extends Component {
 
 
     render() {
-
+        console.log(this.state.blogPosts)
         return ( 
             <div>
                 <Provider  
@@ -121,6 +128,7 @@ class AuthProvider extends Component {
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
                         RouterProps: this.props,
+                        getBlogPosts: this.getBlogPosts,
                     }}> 
                 { this.props.children  }
                 </Provider>
