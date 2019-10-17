@@ -23,7 +23,6 @@ class AuthProvider extends Component {
             password: '',
 
             blogPosts: []
-
         }
     } 
 
@@ -35,6 +34,9 @@ class AuthProvider extends Component {
         })) 
         })
         .catch(err => console.log(err)) }
+
+
+
         
         
         // start of auth features ==========================>

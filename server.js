@@ -3,6 +3,9 @@ const app = express()
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const expressJwt = require('express-jwt')
+const PORT = process.env.PORT || 4444
+const secret = process.env.SECRET || 'super secrete thing'
+
 
 require("dotenv").config();
 
@@ -12,7 +15,7 @@ app.use(express.json())
 app.use('/api', expressJwt({secret: process.env.SECRET}))
 app.use(morgan('dev'))
 
-mongoose.connect('mongodb://localhost:27017/blogitupdb', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/blogitupdb', {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
@@ -31,7 +34,7 @@ app.use( (err,req,res,next) => {
   res.send({errMsg: err.message})
 })
 
-app.listen(4444, () => {
-  console.log(`live! on 4444`)
+app.listen(PORT, () => {
+  console.log(`live! on ${PORT}`)
 })
 
