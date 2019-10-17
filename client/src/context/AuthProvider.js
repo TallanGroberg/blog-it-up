@@ -28,11 +28,13 @@ class AuthProvider extends Component {
 
     componentDidMount() {
         blogPostAxios.get('/api/blog/')
-        .then( res => {this.setState({
-            blogPosts: [ res.data]
-        }) })
-        .catch(err => console.log(err)) 
-    }
+        .then( res => { 
+            this.setState(prev => ({
+            blogPosts: [...prev.blogPosts, ...res.data]
+        })) 
+        })
+        .catch(err => console.log(err)) }
+        
         
         // start of auth features ==========================>
     logout = () => {
@@ -115,7 +117,7 @@ class AuthProvider extends Component {
                         signUp: this.signUp,
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
-
+                        RouterProps: this.props,
                     }}> 
                 { this.props.children  }
                 </Provider>

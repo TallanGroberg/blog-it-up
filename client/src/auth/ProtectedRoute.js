@@ -3,18 +3,18 @@ import { withAuth, } from '../context/AuthProvider'
 import {Route, Redirect} from 'react-router-dom'
 
 
-const ProtectedRoute = (props) => {
-  // console.log('protected route', props)
-const {component: Component, ...rest} = props
+function ProtectedRoute(props) {
+  const {component: Component, ...rest} = props
+  console.log('Component', props)
 
-console.log(Component)
+
 
   return (
 
-
-    <div>
-      test
-    </div>
+    props.token ? 
+      <Route {...rest} component={Component} />
+      :
+      <Redirect to='login' />
   );
 };
 
