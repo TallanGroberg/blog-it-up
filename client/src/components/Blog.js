@@ -17,7 +17,6 @@ const Blog = props => {
     }
 
 
-
     const {post} = props
     return (<>
         {toggle ? 

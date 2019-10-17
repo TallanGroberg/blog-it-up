@@ -5,6 +5,7 @@ import { withCrud } from '../context/CrudProvider.js'
 
 
 const EditBlog = (props) => {
+  console.log('edit blog', props)
   const [edits, setEdits] = useState({})
 
   
@@ -17,14 +18,13 @@ const EditBlog = (props) => {
   
   const handleChange = (e) => {
     const {name, value} = e.target
-    setEdits(edits => ({...edits, [name]: value}))
+      setEdits(edits => ({...edits, [name]: value}))
   }
 
   
-   const {_id, } = props.post
   return (
     <div>
-         <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <input placeholder="Title"
                 name='title'
                 value={edits.title}
