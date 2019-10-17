@@ -1,14 +1,34 @@
 import React, {useState,} from 'react';
+import axios from 'axios'
+
+const blogPostAxios = axios.create()
+blogPostAxios.interceptors.request.use((config)=>{
+  const token = localStorage.getItem("token");
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
+})
 
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
-
-  const handleSubmit = (e, _id, edits) => {
+  const [toggle, setToggle] = useState(true)
+  console.log('edits in edit blog', edits)
+  
+  const toggler = () => {
+    setToggle(!toggle )
+}
+  
+  const handleSubmit = (e) => {
     e.preventDefault()
+    props.toggler()
+
     sendEdits(_id, edits)
   }
-const sendEdits = (_id, edits) => {
-  axios.put(`/api/blog/${_id}`, edits)
+const sendEdits = (_id, edits,) => {
+ 
+ 
+  blogPostAxios.put(`/api/blog/${_id}`, edits)
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
 }
   
   const handleChange = (e) => {
@@ -16,7 +36,8 @@ const sendEdits = (_id, edits) => {
     setEdits(edits => ({...edits, [name]: value}))
   }
 
-
+  
+   const {_id, } = props.post
   return (
     <div>
          <form onSubmit={handleSubmit}>
