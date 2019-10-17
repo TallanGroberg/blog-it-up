@@ -24,7 +24,7 @@ const App = props => {
      <Route render={ rProps => <Navbar {...rProps} />} />
       <Switch>
         <Route exact path='/' render={rProps => !token ? <SignUp /> : <Redirect to="/allblogposts"/>}/>
-        <Route path='/login' component={Login}/>
+        <Route path='/login' render={rProps =>  !token ? <Login /> : <Redirect to='/allblogposts' />}/>
         <ProtectedRoute path='/allblogposts' component={BlogList}/>
         <ProtectedRoute path='/publishablogpost' component={Publish}/>
       
