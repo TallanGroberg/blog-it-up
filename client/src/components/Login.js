@@ -3,7 +3,7 @@ import { withAuth } from '../context/AuthProvider.js'
 import { Link } from 'react-router-dom'
 
 const Login = (props) => {
-    const  {name, email, password, handleChange, handleSubmitForLogin, login} = props
+    const  {name, email, password, handleChange, handleSubmitForLogin } = props
 
 
 
