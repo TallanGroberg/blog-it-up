@@ -13,7 +13,7 @@ const SignUp = props => {
       const { name, email, password,  handleChange, handleSubmit, } = props
       
          
-    console.log(props)
+
     return(
         <div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>

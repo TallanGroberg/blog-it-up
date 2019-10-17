@@ -104,7 +104,7 @@ class AuthProvider extends Component {
 
 
     render() {
-        console.log('blogpost', this.state.blogPosts)
+
         return ( 
             <div>
                 <Provider  

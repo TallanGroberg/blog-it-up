@@ -9,7 +9,6 @@ const Navbar = props => {
         props.logout()
     }
 
-    console.log('nav bar props',props)
     return(
         <div style={{position: 'fixed', border: '1px solid black', padding: 10, bottom: 0, margin: 10}}>
             <>
