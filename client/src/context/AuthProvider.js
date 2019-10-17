@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
-
 const blogPostAxios = axios.create()
+
 
 blogPostAxios.interceptors.request.use((config)=>{
     const token = localStorage.getItem("token");
@@ -13,8 +12,8 @@ blogPostAxios.interceptors.request.use((config)=>{
 const { Provider, Consumer } = React.createContext()
 
 class AuthProvider extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             user: JSON.parse(localStorage.getItem("user")) || {},
             token:  localStorage.getItem("token") || "",
@@ -28,17 +27,12 @@ class AuthProvider extends Component {
     } 
 
     componentDidMount() {
-        blogPostAxios.get('/api/blog/').then( res => { console.log( 'res from context',res)
-            this.setState({
+        blogPostAxios.get('/api/blog/')
+        .then( res => {this.setState({
             blogPosts: [ res.data]
         }) })
-        .catch(err => console.log(err)) }
-        
-    // getAllBlogs = (user) => {
-    //     axios.get('/api/blog/')
-    //     .then(res => console.log(res.data))
-    //     .catch(err => console.log(err))
-    // }
+        .catch(err => console.log(err)) 
+    }
         
         // start of auth features ==========================>
     logout = () => {
@@ -77,6 +71,7 @@ class AuthProvider extends Component {
             name: '',
             email: '',
             password: '',
+            
         })) }
     
     
@@ -105,11 +100,11 @@ class AuthProvider extends Component {
 
 
     render() {
-        
         return ( 
             <div>
                 <Provider  
                     value={{
+                        blogPosts: this.state.blogPosts,
                         user: this.state.user,
                         token: this.state.token,
                         name: this.state.name,
@@ -120,7 +115,7 @@ class AuthProvider extends Component {
                         signUp: this.signUp,
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
-                        historyPush: this.props.history.push,
+
                     }}> 
                 { this.props.children  }
                 </Provider>
@@ -135,4 +130,4 @@ export const withAuth = C => props => (
     </Consumer>
 )
 
-export default withRouter(AuthProvider)
+export default AuthProvider
