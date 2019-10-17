@@ -22,7 +22,6 @@ class AuthProvider extends Component {
             password: '',
 
             blogPosts: []
-
         }
     } 
 
@@ -34,10 +33,8 @@ class AuthProvider extends Component {
         })) 
         })
         .catch(err => console.log(err)) }
-        
-    deletePost = () => {
-        axios.delete('/api/blog/:_id')
-    }
+
+
         
         // start of auth features ==========================>
     logout = () => {

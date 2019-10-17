@@ -22,9 +22,6 @@ const BlogList = (props) => {
                                                 </div>
                                                 )                
 
-    const deletePost = () => {
-        axios.delete('/')
-    }
 
     return (
         <div>
