@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, "client", "build")))
 
 //text if this works 
 
-app.use('/api', expressJwt({secret: process.env.SECRET}))
+app.use('/api', expressJwt({secret: secret}))
 
 
 
