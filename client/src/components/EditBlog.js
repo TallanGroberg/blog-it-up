@@ -21,11 +21,10 @@ const EditBlog = (props) => {
     sendEdits(_id, edits)
   }
 const sendEdits = (_id, edits,) => {
- 
- 
+
   blogPostAxios.put(`/api/blog/${_id}`, edits)
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
+  
+  
 }
   
   const handleChange = (e) => {
