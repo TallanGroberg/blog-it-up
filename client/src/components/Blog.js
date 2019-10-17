@@ -24,6 +24,7 @@ const Blog = props => {
     const deleteBlogPost = (_id) => {
         blogPostAxios.delete(`/api/blog/${_id}`)
     }
+
     
     const {post} = props
     return (<>
@@ -31,14 +32,20 @@ const Blog = props => {
         
 
             <> 
-                <h1 key={post._id}>{post.title}</h1>
-                <button onClick={toggler}>{!toggle ? 'hide' : 'edit'}</button>
+                <h1>{post.title}</h1>
+                <p>{post.author}</p>
+                <p>{post.date}</p>
+                <img src={post.image} alt={post.title} style={{width: 200}}/>
+                <p style={{display: 'none'}}>Description: {post.description}</p>
+                <p>{post.category}</p>
+                <button>Read more</button>
+                <button onClick={toggler}>{!toggle ? 'cancel' : 'edit'}</button>
                 <button onClick={() => deleteBlogPost(post._id)}>Delete</button>
             </>
             :
             <>
             <EditBlog toggler={toggler} post={post} />
-            <button onClick={toggler}>{!toggle ? 'hide' : 'edit'}</button>
+            <button onClick={toggler}>{!toggle ? 'cancel' : 'edit'}</button>
             </>}
           
     

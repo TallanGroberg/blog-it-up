@@ -59,8 +59,8 @@ const sendEdits = (_id, edits,) => {
             value={edits.description}
             onChange={handleChange} />
             <input placeholder="Category"
-            name='catagory'
-            value={edits.catagory}
+            name='category'
+            value={edits.category}
             onChange={handleChange}/>
             <button>Publish</button>
             </form>

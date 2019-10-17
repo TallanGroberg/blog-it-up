@@ -54,8 +54,8 @@ const Publish = (props) => {
             value={inputs.description}
             onChange={handleChange} />
             <input placeholder="Category"
-            name='catagory'
-            value={inputs.catagory}
+            name='category'
+            value={inputs.category}
             onChange={handleChange}/>
             <button>Publish</button>
             </form>

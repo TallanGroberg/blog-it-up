@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
-
 const blogPostAxios = axios.create()
+
 
 blogPostAxios.interceptors.request.use((config)=>{
     const token = localStorage.getItem("token");
@@ -13,8 +12,8 @@ blogPostAxios.interceptors.request.use((config)=>{
 const { Provider, Consumer } = React.createContext()
 
 class AuthProvider extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             user: JSON.parse(localStorage.getItem("user")) || {},
             token:  localStorage.getItem("token") || "",
@@ -41,8 +40,6 @@ class AuthProvider extends Component {
            
 
 
-
-        
         
         // start of auth features ==========================>
     logout = () => {
@@ -84,6 +81,7 @@ class AuthProvider extends Component {
             name: '',
             email: '',
             password: '',
+            
         })) }
     
     
@@ -142,4 +140,4 @@ export const withAuth = C => props => (
     </Consumer>
 )
 
-export default withRouter(AuthProvider)
+export default AuthProvider

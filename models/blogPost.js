@@ -18,13 +18,13 @@ const blogPostSchema = new Schema({
     type: String,
   },
   image: {
-    string: String,
+    type: String,
   },
   description: {
     type: String,
   },
-  catagory: {
-    type:String
+  category: {
+    type: String
   }
 })
 
