@@ -11,7 +11,7 @@ const dataBaseChange = (err,req,res,next,arg) =>  err ? res.status(500).next(err
 
 blogRouter.get('/', (req,res,next) => {
   BlogPost.find({user: req.user._id, }, (err,blogPosts) => {
-    console.log(blogPosts)
+    
     handleRequest(err,req,res,next,blogPosts)
   })
 })
@@ -23,7 +23,7 @@ blogRouter.post('/', (req,res,next) => {
   newBlogPost.user = req.user._id
   newBlogPost.save( (err, blogPost) => {
     dataBaseChange(err,req,res,next,blogPost)
-    console.log(blogPost)
+    
   })
 })
 

@@ -9,7 +9,7 @@ const Profile = (props) => {
   const toggler = () => {
     setToggle(prev => (!prev))
   }
-  console.log(toggle)
+  
   return (
     <div>
       {currentUser.map( you => {

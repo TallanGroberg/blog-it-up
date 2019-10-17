@@ -13,7 +13,7 @@ blogPostAxios.interceptors.request.use((config)=>{
 })
 const useFormHandler = () => {
   const [inputs, setInputs] = useState({})
-  console.log(inputs)
+
 
   const handleSubmit = (_id, inputs) => {
 

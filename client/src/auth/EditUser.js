@@ -12,7 +12,7 @@ const EditUser = (props) => {
   const passwordHider = () => {
     setHide(hide => (!hide))
   }
-  console.log(hide)
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
