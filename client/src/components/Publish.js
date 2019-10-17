@@ -13,6 +13,7 @@ const Publish = (props) => {
     const [inputs, setInputs] = useState({})
 
     const handleSubmit = (e) => {
+       
         e.preventDefault()
         blogPostAxios.post('/api/blog', inputs)
     }

@@ -3,7 +3,7 @@ import { withAuth } from '../context/AuthProvider.js'
 import { Link } from 'react-router-dom'
 
 const Login = (props) => {
-    const  {name, email, password, handleChange, handleSubmitForLogin, login} = props
+    const  {name, email, password, handleChange, handleSubmitForLogin } = props
 
 
 
@@ -36,7 +36,7 @@ const Login = (props) => {
                     />
 
                     <br />
-                    <button onClick={localStorage.getItem('token') !== null ? props.history.push('/allblogposts') : null}>login</button>
+                    <button>login</button>
                 </form>
             </div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>

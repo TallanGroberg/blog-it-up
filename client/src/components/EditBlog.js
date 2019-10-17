@@ -10,12 +10,9 @@ blogPostAxios.interceptors.request.use((config)=>{
 
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
-  const [toggle, setToggle] = useState(true)
-  console.log('edits in edit blog', edits)
+
   
-  const toggler = () => {
-    setToggle(!toggle )
-}
+
   
   const handleSubmit = (e) => {
     e.preventDefault()
