@@ -24,6 +24,7 @@ const Blog = props => {
     const deleteBlogPost = (_id) => {
         blogPostAxios.delete(`/api/blog/${_id}`)
     }
+    
     const {post} = props
     return (<>
         {toggle ? 
