@@ -1,20 +1,22 @@
-import React, {useState,} from 'react';
-
-import {withAuth} from "../context/AuthProvider"
-
+import React, { useState } from 'react';
+import axios from 'axios'
+import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
+import { withCrud } from '../context/CrudProvider.js'
 
 
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
-    const {_id, } = props.post
 
+  const {_id} = props.post
   
   const handleSubmit = (e) => {
     e.preventDefault()
-      props.toggler()
-        props.sendEdits(_id, edits)
+    props.toggler()
+
+    props.sendEdits(_id, edits)
   }
 
+  console.log('_id is in editblog', _id)
   
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -56,7 +58,4 @@ const EditBlog = (props) => {
   );
 };
 
-
-//
-
-export default withAuth(EditBlog);
+export default withAuth(withCrud(EditBlog))

@@ -1,31 +1,22 @@
 import React, {useState} from 'react'
-import { withAuth } from '../context/AuthProvider.js'
+import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
 import EditBlog from './EditBlog'
 import axios from 'axios'
-
-
-const blogPostAxios = axios.create()
-blogPostAxios.interceptors.request.use((config)=>{
-  const token = localStorage.getItem("token");
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
-})
+import { withCrud } from '../context/CrudProvider.js'
 
 
 
 const Blog = props => {
+    console.log("blog", props)
     const [toggle, setToggle] = useState(true)
+    const [fadeToggle, setFadeToggle] = useState(false)
     //in this section we have each individual blog post that displays the title, author, published date, image, category. Once a user clicks on the post, it will take us to another page that will allow users to read the full details of the post, edit, delete(if the user created the post, they can delete it. Otherwise they cannot delete the post).
 
     const toggler = () => {
         setToggle(!toggle )
     }
-    //move to context after context is set up for it
-    const deleteBlogPost = (_id) => {
-        blogPostAxios.delete(`/api/blog/${_id}`)
-    }
 
-    
+
     const {post} = props
     return (<>
         {toggle ? 
@@ -36,11 +27,11 @@ const Blog = props => {
                 <p>{post.author}</p>
                 <p>{post.date}</p>
                 <img src={post.image} alt={post.title} style={{width: 200}}/>
-                <p style={{display: 'none'}}>Description: {post.description}</p>
+                <p className='description'>Description: {post.description}</p>
                 <p>{post.category}</p>
                 <button>Read more</button>
                 <button onClick={toggler}>{!toggle ? 'cancel' : 'edit'}</button>
-                <button onClick={() => deleteBlogPost(post._id)}>Delete</button>
+                <button onClick={() => props.deleteBlogPost(post._id)}>Delete</button>
             </>
             :
             <>
@@ -53,4 +44,4 @@ const Blog = props => {
     </>)
 }
 
-export default withAuth(Blog)
+export default withAuth(withCrud(Blog))

@@ -3,8 +3,6 @@ import axios from 'axios'
 
 
 export const blogPostAxios = axios.create()
-
-
 blogPostAxios.interceptors.request.use((config)=>{
     const token = localStorage.getItem("token");
     config.headers.Authorization = `Bearer ${token}`;
@@ -21,34 +19,9 @@ class AuthProvider extends Component {
             token:  localStorage.getItem("token") || "",
             name: '',
             email: '',
-            password: '',
-
-            blogPosts: []
+            password: ''
         }
-    } 
-
-    
-    getBlogPosts = () => {
-        blogPostAxios.get('/api/blog/')
-        .then( res => { 
-            this.setState(prev => {
-                return {blogPosts: [ ...res.data]}
-            }) 
-        })
-        .catch(err => console.log(err)) 
-        this.setState(prev => ({
-            
-        }))
-    }
-    sendEdits =  (_id, edits,) => {
-        blogPostAxios.put(`/api/blog/${_id}`, edits)
-        .then(res => {
-            this.setState(prev => ({
-                blogPosts: prev.blogPosts.map( blog => blog._id === _id ?  res.data : blog )
-            }))
-        })
-    }
-           
+    }   
 
 
         
@@ -124,7 +97,6 @@ class AuthProvider extends Component {
             <div>
                 <Provider  
                     value={{
-                        blogPosts: this.state.blogPosts,
                         user: this.state.user,
                         token: this.state.token,
                         name: this.state.name,
@@ -136,8 +108,6 @@ class AuthProvider extends Component {
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
                         RouterProps: this.props,
-                        getBlogPosts: this.getBlogPosts,
-                        sendEdits: this.sendEdits,
                     }}> 
                 { this.props.children  }
                 </Provider>
