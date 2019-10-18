@@ -8,7 +8,8 @@ class CrudProvider extends Component {
     constructor() {
         super()
         this.state = {
-            blogPosts: []
+            blogPosts: [],
+            favoriteBlogPosts: []
         }
     }
 
@@ -44,6 +45,14 @@ class CrudProvider extends Component {
         .catch(err => console.log(err))
     }
 
+    getFavoriteBlogPosts = (_id) => {
+        blogPostAxios.get(`/api/blog/${_id}`)
+        .then(res => this.setState(prevState => ({
+            favoriteBlogPosts: [...prevState.favoriteBlogPosts, res.data]
+        })))
+        .catch(err => console.log(err)) 
+    }
+
     render() {
         return(
             <div>
@@ -52,10 +61,12 @@ class CrudProvider extends Component {
                         blogPosts: this.state.blogPosts,
                         getBlogPosts: this.getBlogPosts,
                         deleteBlogPost: this.deleteBlogPost,
-                        sendEdits: this.sendEdits
+                        sendEdits: this.sendEdits,
+                        favoriteBlogPosts: this.state.favoriteBlogPosts,
+                        getFavoriteBlogPosts: this.getFavoriteBlogPosts
                     }}>
 
-                { this.props.children  }
+                { this.props.children }
                 </Provider>
             </div>
         )
