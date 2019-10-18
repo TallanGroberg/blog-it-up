@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
-import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
+import { withAuth } from '../context/AuthProvider.js'
 import EditBlog from './EditBlog'
-import axios from 'axios'
 import { withCrud } from '../context/CrudProvider.js'
 
 
@@ -14,7 +13,6 @@ const Blog = props => {
     const toggler = () => {
         setToggle(!toggle )
     }
-
 
     const {post} = props
     return (<>
