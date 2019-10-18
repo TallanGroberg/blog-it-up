@@ -10,27 +10,30 @@ const dataBaseChange = (err,req,res,next,arg) =>  err ? res.status(500).next(err
 userRouter.get('/', (req,res,next) => {
 
   User.find( (err, users) => {
-   handleRequest(err,req,res,users)
-   console.log(user)
+    handleRequest(err,req,res,next,users)
   })
 })
 
 userRouter.get('/:_id', (req,res,next) => {
   User.findById(req.params._id, (err,user) => {
-    handleRequest(err,req,res,user )
+    handleRequest(err,req,res,next, user )
   }) 
 })
 
 userRouter.delete('/:_id', (req,res,next) => {
   User.findByIdAndDelete(req.params._id, (err,user) => {
-    dataBaseChange(err,req,res,user)
+
+    dataBaseChange(err,req,res,next, user)
   })
 })
 
-userRouter.put('/:token', (req,res,next) => {
-  User.findByIdAndUpdate(req.params.token, req.body, {new: true}, (err, user) => {
+userRouter.put('/:_id', (req,res,next) => {
+  User.findByIdAndUpdate(req.params._id, req.body, {new: true}, (err, user) => {
+    if(user.editPassword)
+
+    user = user.editPassword()
     dataBaseChange(err,req,res,next,user)
-    console.log(user)
+   
   })
 })
 
