@@ -36,10 +36,21 @@ userSchema.methods.checkPassword = function(passwordAttempt, callback) {
   })
 }
 
+
 userSchema.methods.withoutPassword = function() {
   const user = this.toObject()
   delete user.password
   return user
+}
+
+userSchema.methods.editPassword = function(next) {
+  const user = this
+  if(!user.isModified('password')) return next()
+  bcrypt.hash(user.password, 11, (err, hash) => {
+    if(err)return next(err)
+    user.password = hash
+    next()
+  })
 }
 
 module.exports = mongoose.model('User', userSchema)

@@ -31,8 +31,7 @@ signUpRouter.post('/signup', (req,res,next) => {
       if(err) {res.status(500).send(err)}
       
       const token = jwt.sign(user.withoutPassword(), secret)
-      console.log('token',token)
-      console.log('user password', user.password)
+     
       return res.status(201).send({success: true, user: user.withoutPassword(), token})
     })
   })
