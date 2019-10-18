@@ -6,7 +6,6 @@ import { withCrud } from '../context/CrudProvider.js'
 
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
-
   const {_id} = props.post
   
   const handleSubmit = (e) => {

@@ -15,8 +15,6 @@ import { withCrud } from './context/CrudProvider.js'
 
 const App = props => {
   const { token } = props
-
-
   
   return(
     <div>

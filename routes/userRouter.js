@@ -31,7 +31,6 @@ userRouter.delete('/:_id', (req,res,next) => {
 
 userRouter.put('/:_id', (req,res,next) => {
   const user = req.body
-
  //1st promise 
   const hashPassword = new Promise((resolve, reject) => {
 
@@ -41,6 +40,7 @@ userRouter.put('/:_id', (req,res,next) => {
       resolve(user.password)
     })
   })
+  
   .then(pass => {
     
     User.findByIdAndUpdate(req.params._id, req.body, {new: true}, (err, user) => {
