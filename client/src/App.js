@@ -16,7 +16,7 @@ import { withCrud } from './context/CrudProvider.js'
 const App = props => {
   const { token } = props
 
-  console.log('blog post axios in app.js',blogPostAxios)
+
   
   return(
     <div>

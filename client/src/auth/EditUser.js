@@ -8,21 +8,18 @@ const EditUser = (props) => {
   const [hide, setHide] = useState(true)
   const [inputs, setInputs] = useState({})
 
-  const {toggler, _id} = props.user
+  const { _id} = props.user
+  const {toggler} = props
   const { handleEdit,} = useFormHandler()
 
- const cleanToken = (token) => {
-  // return token.replace(/[^A-Za-z0-9]/).split(' ').join('').split(".").join('').split(",").join('').split('_').join('').split('undefined').join('').split('_').join('').split('.').join('')
-  return token.replace(/[^A-Za-z0-9]/)
-  
- }
 
- console.log(_id)
+
+
   
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
+    toggler()
     handleEdit(_id, inputs)
   }
   
@@ -52,14 +49,14 @@ const EditUser = (props) => {
           value={inputs.email}
           onChange={handleChange}
         />
-        <p>password cannot edit passwords at this time</p>
-        {/* <input
+
+        <input
           type={hide ? 'password' : ''}
           placeholder="password"
           name='password'
           value={inputs.password}
           onChange={handleChange}
-        /> */}
+        /> 
         <button>Submit</button>
 
       </form>
