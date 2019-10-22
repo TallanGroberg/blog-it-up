@@ -23,9 +23,15 @@ class AuthProvider extends Component {
         }
     }   
 
-
+    
         
         // start of auth features ==========================>
+    changeUserState = (inputs) => {
+       this.setState(prev => {
+           return {user: inputs,}
+       })
+    }
+
     logout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -93,6 +99,7 @@ class AuthProvider extends Component {
 
 
     render() {
+        console.log('state in auth provider',this.state)
         return ( 
             <div>
                 <Provider  
@@ -108,6 +115,7 @@ class AuthProvider extends Component {
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
                         RouterProps: this.props,
+                        changeUserState: this.changeUserState,
                     }}> 
                 { this.props.children  }
                 </Provider>
