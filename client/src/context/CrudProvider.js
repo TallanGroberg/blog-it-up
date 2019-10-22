@@ -45,15 +45,32 @@ class CrudProvider extends Component {
         .catch(err => console.log(err))
     }
 
-    getFavoriteBlogPosts = (_id) => {
-        blogPostAxios.get(`/api/blog/${_id}`)
-        .then(res => this.setState(prevState => ({
-            favoriteBlogPosts: [...prevState.favoriteBlogPosts, res.data]
-        })))
-        .catch(err => console.log(err)) 
+    // get request to current user's favorites
+    getFavoriteBlogPosts = (userId) => {
+        blogPostAxios.get(`/auth/${userId}/favorites`)
+        .then(res => {
+            this.setState(prev => ({
+                favoriteBlogPosts: [...prev.favoriteBlogPosts, res.data]
+                }))})
+        .catch(err => console.log(err))
     }
 
+    // post request to current user's favorites to save current blog post's ID
+    putFavoriteBlogPosts = ( userId,post) => {
+        blogPostAxios.put(`/auth/${userId}/favorites`, { favorites: post._id })
+            .then(res => {
+                this.setState(prev => {
+                    const filterDuplicates = new Set ([...prev.favoriteBlogPosts, post])
+                    const backToArr = [...filterDuplicates]
+                    return {favoriteBlogPosts: [...backToArr]}
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
+
     render() {
+        // console.log(this.state.favoriteBlogPosts)
         return(
             <div>
                 <Provider 
@@ -63,7 +80,8 @@ class CrudProvider extends Component {
                         deleteBlogPost: this.deleteBlogPost,
                         sendEdits: this.sendEdits,
                         favoriteBlogPosts: this.state.favoriteBlogPosts,
-                        getFavoriteBlogPosts: this.getFavoriteBlogPosts
+                        getFavoriteBlogPosts: this.getFavoriteBlogPosts,
+                        putFavoriteBlogPosts: this.putFavoriteBlogPosts
                     }}>
 
                 { this.props.children }

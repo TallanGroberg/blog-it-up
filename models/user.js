@@ -14,6 +14,10 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  favorites: {
+    type: Array,
+    default: []
   }
 })
 
@@ -52,5 +56,6 @@ userSchema.methods.editPassword = function(next) {
     next()
   })
 }
+
 
 module.exports = mongoose.model('User', userSchema)
