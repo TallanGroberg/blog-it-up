@@ -19,7 +19,8 @@ class AuthProvider extends Component {
             token:  localStorage.getItem("token") || "",
             name: '',
             email: '',
-            password: ''
+            password: '',
+            passwordConfirmation: '',
         }
     }   
 
@@ -88,6 +89,7 @@ class AuthProvider extends Component {
             name: '',
             email: '',
             password: '',
+            passwordConfirmation: '',
             
         }))  }
     
@@ -99,7 +101,7 @@ class AuthProvider extends Component {
 
 
     render() {
-        console.log('state in auth provider',this.state)
+    
         return ( 
             <div>
                 <Provider  
@@ -109,6 +111,7 @@ class AuthProvider extends Component {
                         name: this.state.name,
                         email: this.state.email,
                         password: this.state.password,
+                        passwordConfirmation: this.passwordConfirmation,
                         handleChange: this.handleChange,
                         handleSubmit: this.handleSubmit,
                         signUp: this.signUp,

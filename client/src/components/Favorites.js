@@ -5,16 +5,16 @@ import Favorite from './Favorite.js'
 
 const Favorites = props => {
     //you will want to map through each individual favorite. Add in a delete button that allows user to remove the blog post from their f
+    console.log(props)
 
-    console.log('favorites', props)
+    const currentUser = JSON.parse(localStorage.getItem('user'))
 
-
-
+    useEffect(() => {
+        props.getFavoriteBlogPosts(currentUser._id)
+    }, [])
 
     return(
         <div>
-            {  props.favoriteBlogPosts.map(favoritePost=> {
-                return <Favorite key={favoritePost._id} {...favoritePost} />}) }
         </div>
     )
 }

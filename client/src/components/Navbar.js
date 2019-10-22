@@ -10,7 +10,7 @@ const Navbar = props => {
     }
 
     return(
-        <div style={{position: 'fixed', border: '1px solid black', padding: 10, bottom: 0, margin: 10}}>
+        <div style={{border: '1px solid black', padding: 10, margin: 10}}>
             <>
                 Blog it up!
             </>

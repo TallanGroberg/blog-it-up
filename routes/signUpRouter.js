@@ -38,9 +38,13 @@ signUpRouter.post('/signup', (req,res,next) => {
 })
 
 signUpRouter.post('/login', (req,res,next) => {
+    console.log('test')
     User.findOne({name: req.body.name.toLowerCase()}, (err,user) => {
       if(err) {return next(err)}
-      if(!user) {return res.status(403).next(new Error('email or password is incorrect'))}
+      if(!user) {
+          res.status(401)
+          return next(new Error('email or password is incorrect'))
+      }
 
       user.checkPassword(req.body.password, (err,match) => {
       if(err) {return res.status(500).send(err)};
