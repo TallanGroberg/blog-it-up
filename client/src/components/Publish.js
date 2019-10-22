@@ -22,6 +22,7 @@ const Publish = (props) => {
             }))
         })
         .catch(err => console.log(err))
+        props.history.push('/allblogposts')
     }
 
 

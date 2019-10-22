@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import { blogPostAxios} from '../context/AuthProvider'
-import axios from 'axios'
+
+import { blogPostAxios,} from '../context/AuthProvider'
+
 
 
 
@@ -13,20 +13,24 @@ blogPostAxios.interceptors.request.use((config)=>{
     return config;
 })
 const useFormHandler = () => {
-  const [inputs, setInputs] = useState({})
+  
 
-
-  const handleEdit = (token, inputs) => {
-    blogPostAxios.put(`/auth/${token}`, inputs)
+  const handleEdit = (_id, inputs) => {
+    
+    blogPostAxios.put(`/auth/${_id}`, inputs).then( res => {
+      delete inputs.password
+    })
+    return inputs
+    
 }
 
 const handleChange = (e) => {
     const {name, value} = e.target
-    setInputs(inputs =>  ({...inputs, [name]: value, }))
+   
 }
 
 return {
-        inputs,
+
         handleChange,
         handleEdit
       }

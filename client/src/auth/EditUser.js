@@ -12,15 +12,17 @@ const EditUser = (props) => {
   const {toggler} = props
   const { handleEdit,} = useFormHandler()
 
-
+console.log('_id in editUser',_id)
 
 
   
 
   const handleSubmit = (e) => {
     e.preventDefault()
+   
+    
+    props.changeUserState( handleEdit(props.user._id, inputs) )
     toggler()
-    handleEdit(_id, inputs)
   }
   
   const handleChange = (e) => {
