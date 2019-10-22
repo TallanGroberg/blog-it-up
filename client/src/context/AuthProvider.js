@@ -84,7 +84,7 @@ class AuthProvider extends Component {
         const user = { 
             token: this.state.token,
             name: this.state.name,
-            email: this.state.email, 
+            email: this.state.email,
             password:  this.state.password
         }  
             this.signUp(user)
