@@ -23,17 +23,31 @@ class AuthProvider extends Component {
             passwordConfirmation: '',
         }
     }   
-
     
-        
-        // start of auth features ==========================>
+    
+    
+    // start of auth features ==========================>
     changeUserState = (inputs) => {
-       this.setState(prev => {
-           return {user: inputs,}
-       })
+        this.setState(prev => {
+            return {user: inputs,}
+        })
     }
-
-    logout = () => {
+    
+  
+        signUp = (user) => {
+            
+            //make this thenable return axios
+            
+            axios.post(`user/signup`, user).then(res => {
+                const { token, user, } = res.data
+                localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(user));
+                this.setState({token,user,})
+                //makes it so this function can return data
+                //return res make this tenable receive data
+            }).catch(err => console.log(err)) }
+            
+            logout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         this.setState(
@@ -48,17 +62,7 @@ class AuthProvider extends Component {
             this.setState({ user,token,}); 
          })}
     
-    
-    signUp = (user) => {
-        //make this thenable return axios
-       axios.post(`user/signup`, user).then(res => {
-            const { token, user, } = res.data
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(user));
-            this.setState({token,user,})
-            //makes it so this function can return data
-            //return res make this tenable receive data
-            }).catch(err => console.log(err)) }
+
     
     handleSubmitForLogin = (e) => {
         e.preventDefault(e)
@@ -74,6 +78,9 @@ class AuthProvider extends Component {
             password: '',
             
         })) }
+
+        
+
     
     
     handleSubmit = (e) => {
