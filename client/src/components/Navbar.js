@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { withAuth } from '../context/AuthProvider.js'
+import styled from 'styled-components'
 
 const Navbar = props => {
 
@@ -10,19 +11,63 @@ const Navbar = props => {
     }
 
     return(
-        <div style={{border: '1px solid black', padding: 10, margin: 10}}>
-            <>
+        <NavContainer>
+            <Title>
                 Blog it up!
-            </>
-            <nav>
-                <Link to='/allblogposts'>All Blog Posts</Link>
-                <Link to='/publishablogpost'>Publish a Blog Post</Link>
-                <Link to='/favorites'>Favorites</Link>
-                <Link to='/profile'>Profile</Link>
-                <button  onClick={logout}>{localStorage.getItem('token') !== null ? 'logout' :  'login' } </button>
-            </nav>
-        </div>
+            </Title>
+            <Nav>
+                <NavLink to='/allblogposts'>All Blog Posts</NavLink>
+                <NavLink to='/publishablogpost'>Publish a Blog Post</NavLink>
+                <NavLink to='/favorites'>Favorites</NavLink>
+                <NavLink to='/profile'>Profile</NavLink>
+            </Nav>
+            <LogOutSection>
+                <Button onClick={logout}>{localStorage.getItem('token') !== null ? 'logout' :  'login' } </Button>
+            </LogOutSection>
+        </NavContainer>
     )
 }
 
 export default withAuth(Navbar)
+
+const NavContainer = styled.div`
+    background-color: #CAEBF2;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+
+`
+
+const Title = styled.h1`
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-shadow: -.030em .030em #FFF6E6,   -.08em .08em #E7DCD7;
+    color: #FF3B3F;
+`
+
+const Nav = styled.nav`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+`
+
+const NavLink = styled(Link)`
+    color: #A9A9A9;
+    line-height: 30px;
+    margin-right: 10px;
+`
+
+const LogOutSection = styled.div`
+    display: flex;
+    float: right;
+    margin-right: 10px;
+`
+
+const Button = styled.button`
+    color: #FF3B3F;
+    text-shadow: -.030em .030em #FFF6E6,   -.08em .08em #E7DCD7;
+`
+

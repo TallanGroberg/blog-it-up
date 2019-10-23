@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { withAuth } from '../context/AuthProvider.js'
 import { withCrud } from '../context/CrudProvider.js'
-import Favorite from './Favorite.js'
+
 
 const Favorites = props => {
 
