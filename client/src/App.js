@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { withAuth, blogPostAxios } from './context/AuthProvider.js'
 import ProtectedRoute from './auth/ProtectedRoute'
@@ -16,7 +17,7 @@ const App = props => {
   const { token } = props
   
   return(
-    <div>
+    <AppWideStyles>
     
      <Route render={ rProps => <Navbar {...rProps} />} />
       <Switch>
@@ -28,8 +29,37 @@ const App = props => {
       
         <ProtectedRoute path='/favorites' component={Favorites}/>
       </Switch>
-    </div>
+    </AppWideStyles>
   )
 }
+
+const AppWideStyles = styled.div`
+
+button {
+
+	box-shadow: 1px 3px 5px 1px #dae1e3;
+	background:linear-gradient(to bottom, #bab1ba 5%, #c2c2c2 100%);
+	background-color:#bab1ba;
+	border-radius:22px;
+	border:1px solid #c4c2c4;
+
+	cursor:pointer;
+	color:#333333;
+	font-size:17px;
+	padding:3px 29px;
+	text-decoration:none;
+	text-shadow:-1px 0px 9px #e1e2ed;
+  transition: 0.8s;
+}
+
+button:hover {
+	background:linear-gradient(to bottom, #c2c2c2 5%, #bab1ba 100%);
+	background-color:#c2c2c2;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+`
 
 export default withAuth(withCrud(App))
