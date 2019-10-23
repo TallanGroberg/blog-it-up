@@ -22,8 +22,8 @@ const Blog = props => {
         
 
             <> 
-                <h1>{post.title}</h1>
-                <p>Author: {post.author}</p>
+                <h1 className="blogTitle">{post.title}</h1>
+                <p>Written by {post.author}</p>
                 <p>Published date: {post.date}</p>
                 <img src={post.image} alt={post.title} style={{width: 200}}/>
                 <p className='description'>Description: {post.description}</p>
