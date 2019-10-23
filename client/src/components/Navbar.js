@@ -32,9 +32,10 @@ export default withAuth(Navbar)
 
 const NavContainer = styled.div`
     background-color: #CAEBF2;
-    padding: 10px;
-    position: fixed;
+    margin: auto;
     bottom: 0;
+    position: fixed;
+    
     width: 100vw;
 
 `
@@ -56,14 +57,13 @@ const Nav = styled.nav`
 
 const NavLink = styled(Link)`
     color: #A9A9A9;
-    line-height: 30px;
     margin-right: 10px;
 `
 
 const LogOutSection = styled.div`
     display: flex;
     float: right;
-    margin-right: 10px;
+    
 `
 
 const Button = styled.button`

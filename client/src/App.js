@@ -16,10 +16,10 @@ import { withCrud } from './context/CrudProvider.js'
 const App = props => {
   const { token } = props
   
-  return(
-    <AppWideStyles>
+  return(<>
     
-     <Route render={ rProps => <Navbar {...rProps} />} />
+    <Route render={ rProps => <Navbar {...rProps} />} />
+      <AppWideStyles>
       <Switch>
         <Route exact path='/' render={rProps => !token ? <SignUp /> : <Redirect to="/allblogposts"/>}/>
         <Route path='/login' render={rProps =>  !token ? <Login /> : <Redirect to='/allblogposts' />}/>
@@ -30,11 +30,13 @@ const App = props => {
         <ProtectedRoute path='/favorites' component={Favorites}/>
       </Switch>
     </AppWideStyles>
+    </>
   )
 }
 
 const AppWideStyles = styled.div`
-
+margin-bottom: 15vh;
+button:focus{display: none}
 button {
 
 	box-shadow: 1px 3px 5px 1px #dae1e3;
