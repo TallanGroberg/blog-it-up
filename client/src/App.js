@@ -18,8 +18,8 @@ const App = props => {
   
   return(<>
     
-    <Route render={ rProps => <Navbar {...rProps} />} />
       <AppWideStyles>
+    <Route render={ rProps => <Navbar {...rProps} />} />
       <Switch>
         <Route exact path='/' render={rProps => !token ? <SignUp /> : <Redirect to="/allblogposts"/>}/>
         <Route path='/login' render={rProps =>  !token ? <Login /> : <Redirect to='/allblogposts' />}/>
@@ -35,7 +35,7 @@ const App = props => {
 }
 
 const AppWideStyles = styled.div`
-margin-bottom: 15vh;
+margin-bottom: 25vh;
 button:focus{display: none}
 button {
 

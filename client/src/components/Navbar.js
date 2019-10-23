@@ -16,8 +16,8 @@ const Navbar = props => {
                 Blog it up!
             </Title>
             <Nav>
-                <NavLink to='/allblogposts'>All Blog Posts</NavLink>
-                <NavLink to='/publishablogpost'>Publish a Blog Post</NavLink>
+                <NavLink to='/allblogposts'>Blog Posts</NavLink>
+                <NavLink to='/publishablogpost'>Publish</NavLink>
                 <NavLink to='/favorites'>Favorites</NavLink>
                 <NavLink to='/profile'>Profile</NavLink>
             </Nav>
@@ -32,12 +32,9 @@ export default withAuth(Navbar)
 
 const NavContainer = styled.div`
     background-color: #CAEBF2;
-    margin: auto;
-    bottom: 0;
     position: fixed;
-    
-    width: 100vw;
-
+    bottom: 0;
+    width: 100%;
 `
 
 const Title = styled.h1`
@@ -63,7 +60,10 @@ const NavLink = styled(Link)`
 const LogOutSection = styled.div`
     display: flex;
     float: right;
+<<<<<<< HEAD
     
+=======
+>>>>>>> 3e573106187d152686b764a5c03133f98d56c244
 `
 
 const Button = styled.button`

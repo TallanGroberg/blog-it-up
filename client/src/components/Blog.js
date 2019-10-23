@@ -4,13 +4,14 @@ import EditBlog from './EditBlog.js'
 import CommentForm from './CommentForm.js'
 import { withCrud } from '../context/CrudProvider.js'
 import styled from 'styled-components'
-
+import Fade from 'react-reveal/Fade';
 
 
 const Blog = props => {
     
     const [toggle, setToggle] = useState(true)
     const [showComment, setshowComment] = useState(false)
+    const [description, setDescription] = useState(false)
     
     const showCommentForm = () => {
         setshowComment(!showComment)
@@ -27,7 +28,13 @@ const Blog = props => {
         setToggle(!toggle )
     }
 
+    const showDescription = () => {
+        setDescription(!description)
+    }
+    
+
     const {post} = props
+    console.log('description in blog.js', description)
     return (
         <AllBlog>
             {toggle ? 
@@ -37,12 +44,15 @@ const Blog = props => {
                     <BlogTitle>{post.title}</BlogTitle>
                     <p>Posted by <Author>{post.author}</Author> on <PublishedDate>{post.date}</PublishedDate></p>
                     <BlogImage src={post.image} alt={post.title}/>
-                    <DisplayDescription>Description: {post.description}</DisplayDescription>
+                        <Fade top when={description}>
+                            <p>{post.description}</p>
+                        </Fade>
                     <p>Category: {post.category}</p>
-                    <button>Read more</button>
+                    <button onClick={showDescription} >Read more</button>
                     <button onClick={() => props.putFavoriteBlogPosts(currentUser._id, post)}>Favorite</button>
                     <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
                     <button onClick={() => props.deleteBlogPost(post._id)}>Delete</button>
+                   
                 </>
                 :
                 <>
@@ -54,7 +64,8 @@ const Blog = props => {
             </>
            }
           
-    
+        
+      
 
         </AllBlog>
     )
