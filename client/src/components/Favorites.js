@@ -4,7 +4,6 @@ import { withCrud } from '../context/CrudProvider.js'
 import Favorite from './Favorite.js'
 
 const Favorites = props => {
-    //you will want to map through each individual favorite. Add in a delete button that allows user to remove the blog post from their f
 
     const currentUser = JSON.parse(localStorage.getItem('user'))
 

@@ -82,56 +82,13 @@ userRouter.put('/:_id/favorites', (req, res, next) => {
 
 
 // delete request to user's favorites endpoint
-// userRouter.delete('/:_id/favorites/:_id', async (req, res, next) => {
-//   try {
-//       const user = await User.findOne({_id: req.params._id})
-//       const blogPosts = await Blog.findOneAndDelete({_id: {$in: user.favorites}})
-//       return res.status(200).send(blogPosts)
-//   }
-//   catch(err){
-//       res.status(500)
-//       return next(err)
-//   }
-//   })
 
 
 
 
 
 
-// TRASH LIVES HERE
 
-// userRouter.get('/:_id/favorites', (req, res, next) => {
-//   User.findOne({_id: req.params._id}, (err, user) => {
-//     if(err) {
-//       res.status(500)
-//       return next(err)
-//     }
-//     return res.status(200).send(user)
-//   })
-// })
-
-
-// userRouter.post('/:_id/favorites', (req, res, next) => {
-//   User.save({_id: req.params._id}, (err, favorite) => {
-//     if(err) {
-//       res.status(500)
-//       return next(err)
-//     }
-//     return res.status(201).send(favorite)
-//   })
-// })
-
-
-// userRouter.delete('/:_id/favorites', (req, res, next) => {
-//   User.findByIdAndRemove({_id: req.params._id}, (err, deletedFavorite) => {
-//     if (err) {
-//       res.status(500)
-//       return next(err)
-//     }
-//     return res.status(200).send(`Successfully deleted ${deletedFavorite}`)
-//   })
-// })
 
 
 module.exports = userRouter
