@@ -16,8 +16,9 @@ class CrudProvider extends Component {
     getBlogPosts = () => {
         blogPostAxios.get('/blog/')
         .then( res => { 
+            const data = res.data.reverse()
             this.setState(prev => ({
-                blogPosts: [...res.data]
+                blogPosts: [...data]
             })) 
         })
         .catch(err => console.log(err)) 
