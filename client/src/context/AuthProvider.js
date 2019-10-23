@@ -62,7 +62,6 @@ class AuthProvider extends Component {
             this.setState({ user,token,}); 
          })}
     
-
     
     handleSubmitForLogin = (e) => {
         e.preventDefault(e)
@@ -87,7 +86,7 @@ class AuthProvider extends Component {
         e.preventDefault()
         const user = { 
             name: this.state.name,
-            email: this.state.email, 
+            email: this.state.email,
             password:  this.state.password
         }  
             this.signUp(user)

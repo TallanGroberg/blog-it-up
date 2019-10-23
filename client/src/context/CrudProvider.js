@@ -69,7 +69,12 @@ class CrudProvider extends Component {
             })
             .catch(err => console.log(err))
     }
+//start of comment CRUD *******************************
+createBlogComment = (arg) => {
+    blogPostAxios.post('/api/comment', arg)
 
+    
+}
 
     render() {
         return(
@@ -79,10 +84,12 @@ class CrudProvider extends Component {
                         blogPosts: this.state.blogPosts,
                         getBlogPosts: this.getBlogPosts,
                         deleteBlogPost: this.deleteBlogPost,
+                        createBlogComment:this.createBlogComment,
                         sendEdits: this.sendEdits,
                         favoriteBlogPosts: this.state.favoriteBlogPosts,
                         getFavoriteBlogPosts: this.getFavoriteBlogPosts,
                         putFavoriteBlogPosts: this.putFavoriteBlogPosts
+                    
                     }}>
 
                 { this.props.children }

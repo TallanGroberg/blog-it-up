@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { withAuth } from '../context/AuthProvider.js'
-import EditBlog from './EditBlog'
+import EditBlog from './EditBlog.js'
+import CommentForm from './CommentForm.js'
 import { withCrud } from '../context/CrudProvider.js'
 import styled from 'styled-components'
 
@@ -9,6 +10,16 @@ import styled from 'styled-components'
 const Blog = props => {
     
     const [toggle, setToggle] = useState(true)
+    const [showComment, setshowComment] = useState(false)
+    
+    const showCommentForm = () => {
+        setshowComment(!showComment)
+
+    }
+
+    const {_id} = props.post
+
+
     
     const currentUser = JSON.parse(localStorage.getItem('user'))
     
@@ -37,7 +48,13 @@ const Blog = props => {
                 <>
                 <EditBlog toggler={toggler} post={post} />
                 <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
-                </>}
+                <button onClick={() => props.deleteBlogPost(post._id)}>Delete</button>
+                <button onClick={showCommentForm}>Add a comment</button>
+                {showComment === true ? <CommentForm _id={_id} /> : null }
+            </>
+           }
+          
+    
 
         </AllBlog>
     )
