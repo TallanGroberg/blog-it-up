@@ -8,7 +8,7 @@ import axios from 'axios'
 const Publish = (props) => {
     const [inputs, setInputs] = useState({})
 
-    console.log("user in publish",inputs)
+
     
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -54,7 +54,7 @@ const Publish = (props) => {
             name='image'
             value={inputs.image}
             onChange={handleChange} />
-            <input placeholder="Description"
+            <textarea height="100" width='150' placeholder="Description"
             name='description'
             value={inputs.description}
             onChange={handleChange} />
