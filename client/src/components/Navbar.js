@@ -16,8 +16,8 @@ const Navbar = props => {
                 Blog it up!
             </Title>
             <Nav>
-                <NavLink to='/allblogposts'>All Blog Posts</NavLink>
-                <NavLink to='/publishablogpost'>Publish a Blog Post</NavLink>
+                <NavLink to='/allblogposts'>Blog Posts</NavLink>
+                <NavLink to='/publishablogpost'>Publish</NavLink>
                 <NavLink to='/favorites'>Favorites</NavLink>
                 <NavLink to='/profile'>Profile</NavLink>
             </Nav>
