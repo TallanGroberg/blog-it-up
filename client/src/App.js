@@ -35,7 +35,7 @@ const App = props => {
 
 const AppWideStyles = styled.div`
 margin-bottom: 25vh;
-button:foccus{display: none}
+button:focus{display: none}
 button {
 
 	box-shadow: 1px 3px 5px 1px #dae1e3;
