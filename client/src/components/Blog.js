@@ -74,8 +74,10 @@ const Blog = props => {
 export default withAuth(withCrud(Blog))
 
 const AllBlog = styled.div`
+    
     text-align: center;
     color: #A9A9A9;
+    
 `
 
 const BlogTitle = styled.h1`
