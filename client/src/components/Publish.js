@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
+import moment from 'moment'
 import axios from 'axios'
 
 
@@ -7,8 +8,12 @@ import axios from 'axios'
 const Publish = (props) => {
     const [inputs, setInputs] = useState({})
 
+    console.log("user in publish",inputs)
+    
     const handleSubmit = (e) => {
         e.preventDefault()
+        inputs.author = props.user.name
+        inputs.date = moment().format('MMMM Do YYYY, h:mm:ss a')
         blogPostAxios.post('/api/blog', inputs)
         .then(res => {
             setInputs(prevState => ({
@@ -23,8 +28,8 @@ const Publish = (props) => {
         .catch(err => console.log(err))
         props.history.push('/allblogposts')
     }
-
-
+    
+    
     const handleChange = (e) => {
         const {name, value} = e.target
         setInputs(inputs =>  ({...inputs, [name]: value, }))
@@ -43,14 +48,8 @@ const Publish = (props) => {
                 value={inputs.title}
                 onChange={handleChange}
                 />
-            <input placeholder="Author"
-            name='author'
-            value={inputs.author}
-            onChange={handleChange} />
-            <input placeholder="Date"
-            name='date'
-            value={inputs.date}
-            onChange={handleChange} />
+            
+          
             <input placeholder="Image"
             name='image'
             value={inputs.image}

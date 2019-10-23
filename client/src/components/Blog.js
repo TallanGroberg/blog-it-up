@@ -31,6 +31,7 @@ const Blog = props => {
                 <button>Read more</button>
                 <button onClick={() => props.putFavoriteBlogPosts(currentUser._id, post)}>Favorite</button>
                 <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
+           
                 <button onClick={() => props.deleteBlogPost(post._id)}>Delete</button>
             </>
             :
