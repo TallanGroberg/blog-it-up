@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
 
-const blogPostAxios = axios.create()
 
+export const blogPostAxios = axios.create()
 blogPostAxios.interceptors.request.use((config)=>{
     const token = localStorage.getItem("token");
     config.headers.Authorization = `Bearer ${token}`;
@@ -13,33 +12,26 @@ blogPostAxios.interceptors.request.use((config)=>{
 const { Provider, Consumer } = React.createContext()
 
 class AuthProvider extends Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             user: JSON.parse(localStorage.getItem("user")) || {},
             token:  localStorage.getItem("token") || "",
             name: '',
             email: '',
-            password: '',
-
-            blogPosts: []
+            password: ''
         }
-    } 
+    }   
 
-    componentDidMount() {
-        blogPostAxios.get('/api/blog/')
-        .then( res => { 
-            this.setState(prev => ({
-            blogPosts: [...prev.blogPosts, ...res.data]
-        })) 
-        })
-        .catch(err => console.log(err)) }
-
-
-
-        
+    
         
         // start of auth features ==========================>
+    changeUserState = (inputs) => {
+       this.setState(prev => {
+           return {user: inputs,}
+       })
+    }
+
     logout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
@@ -52,21 +44,24 @@ class AuthProvider extends Component {
             const { token, user } = res.data;
             localStorage.setItem("token", token)
             localStorage.setItem("user", JSON.stringify(user))
-            this.setState({ user,token,});  })}
+            this.setState({ user,token,}); 
+         })}
     
     
     signUp = (user) => {
-        axios.post(`user/signup`, user).then(res => {
+        //make this thenable return axios
+       axios.post(`user/signup`, user).then(res => {
             const { token, user, } = res.data
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
             this.setState({token,user,})
-            return res}).catch(err => console.log(err)) }
+            //makes it so this function can return data
+            //return res make this tenable receive data
+            }).catch(err => console.log(err)) }
     
     handleSubmitForLogin = (e) => {
         e.preventDefault(e)
         const user = { 
-            token: this.state.token,
             name: this.state.name,
             email: this.state.email, 
             password:  this.state.password}
@@ -76,13 +71,13 @@ class AuthProvider extends Component {
             name: '',
             email: '',
             password: '',
+            
         })) }
     
     
     handleSubmit = (e) => {
         e.preventDefault()
         const user = { 
-            token: this.state.token,
             name: this.state.name,
             email: this.state.email,
             password:  this.state.password
@@ -104,12 +99,11 @@ class AuthProvider extends Component {
 
 
     render() {
-        console.log('blogpost', this.state.blogPosts)
+        console.log('state in auth provider',this.state)
         return ( 
             <div>
                 <Provider  
                     value={{
-                        blogPosts: this.state.blogPosts,
                         user: this.state.user,
                         token: this.state.token,
                         name: this.state.name,
@@ -121,6 +115,7 @@ class AuthProvider extends Component {
                         handleSubmitForLogin: this.handleSubmitForLogin,
                         logout: this.logout,
                         RouterProps: this.props,
+                        changeUserState: this.changeUserState,
                     }}> 
                 { this.props.children  }
                 </Provider>
@@ -135,4 +130,4 @@ export const withAuth = C => props => (
     </Consumer>
 )
 
-export default withRouter(AuthProvider)
+export default AuthProvider

@@ -5,9 +5,14 @@ const Favorite = props => {
     // Add in a delete button that allows user to remove the blog post from their favorites section
     return(
         <div>
-            this each individual favorite blog post
+            <h1>{props.title}</h1>
+            <p>Author: {props.author}</p>
+            <p>Published date: {props.date}</p>
+            <img src={props.image} alt={props.title} style={{width: 200}}/>
+            <p className='description'>Description: {props.description}</p>
+            <p>Category: {props.category}</p>
         </div>
     )
 }
 
-export default withAuth(Favorites)
+export default withAuth(Favorite)

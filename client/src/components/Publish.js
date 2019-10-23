@@ -13,6 +13,7 @@ const Publish = (props) => {
     const [inputs, setInputs] = useState({})
 
     const handleSubmit = (e) => {
+       
         e.preventDefault()
         blogPostAxios.post('/api/blog', inputs)
     }
@@ -53,8 +54,8 @@ const Publish = (props) => {
             value={inputs.description}
             onChange={handleChange} />
             <input placeholder="Category"
-            name='catagory'
-            value={inputs.catagory}
+            name='category'
+            value={inputs.category}
             onChange={handleChange}/>
             <button>Publish</button>
             </form>

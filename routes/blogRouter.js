@@ -3,23 +3,26 @@ const blogRouter = express.Router()
 const BlogPost = require('../models/blogPost.js')
 
 
+// set up a comment system with commentRouter.get("/:comment", (req,res,next) => Coment.find({comment: req.param.comment}))
+
+
 const handleRequest = (err,req,res,next,arg) => err ? res.status(500).next(err) : res.status(200).send(arg)
 const dataBaseChange = (err,req,res,next,arg) =>  err ? res.status(500).next(err) : res.status(201).send(arg)
 
 blogRouter.get('/', (req,res,next) => {
   BlogPost.find({user: req.user._id, }, (err,blogPosts) => {
-    console.log(blogPosts)
     handleRequest(err,req,res,next,blogPosts)
   })
 })
 
 blogRouter.post('/', (req,res,next) => {
+  
   const newBlogPost = new BlogPost(req.body)
   
   newBlogPost.user = req.user._id
   newBlogPost.save( (err, blogPost) => {
     dataBaseChange(err,req,res,next,blogPost)
-    console.log(blogPost)
+    
   })
 })
 

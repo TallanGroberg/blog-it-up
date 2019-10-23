@@ -1,19 +1,24 @@
 const express = require('express')
 const app = express()
+require("dotenv").config();
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const expressJwt = require('express-jwt')
 const PORT = process.env.PORT || 4444
-const secret = process.env.SECRET || 'super secrete thing'
+
+const path = require("path")
 
 
-require("dotenv").config();
+app.use(express.json())
+app.use(morgan('dev'))
+app.use(express.static(path.join(__dirname, "client", "build")))
+
 
 //text if this works 
 
-app.use(express.json())
 app.use('/api', expressJwt({secret: process.env.SECRET}))
-app.use(morgan('dev'))
+
+
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/blogitupdb', {
   useNewUrlParser: true,
@@ -33,6 +38,10 @@ app.use( (err,req,res,next) => {
   err.name ? res.status(err.status) : null
   res.send({errMsg: err.message})
 })
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`live! on ${PORT}`)

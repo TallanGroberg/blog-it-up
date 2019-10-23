@@ -1,46 +1,31 @@
-import React, {useState,} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
+import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
+import { withCrud } from '../context/CrudProvider.js'
 
-const blogPostAxios = axios.create()
-blogPostAxios.interceptors.request.use((config)=>{
-  const token = localStorage.getItem("token");
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
-})
 
 const EditBlog = (props) => {
   const [edits, setEdits] = useState({})
-  const [toggle, setToggle] = useState(true)
-  console.log('edits in edit blog', edits)
-  
-  const toggler = () => {
-    setToggle(!toggle )
-}
+  const {_id} = props.post
   
   const handleSubmit = (e) => {
     e.preventDefault()
     props.toggler()
 
-    sendEdits(_id, edits)
+    props.sendEdits(_id, edits)
   }
-const sendEdits = (_id, edits,) => {
- 
- 
-  blogPostAxios.put(`/api/blog/${_id}`, edits)
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
-}
+
+  console.log('_id is in editblog', _id)
   
   const handleChange = (e) => {
     const {name, value} = e.target
-    setEdits(edits => ({...edits, [name]: value}))
+      setEdits(edits => ({...edits, [name]: value}))
   }
 
   
-   const {_id, } = props.post
   return (
     <div>
-         <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <input placeholder="Title"
                 name='title'
                 value={edits.title}
@@ -63,8 +48,8 @@ const sendEdits = (_id, edits,) => {
             value={edits.description}
             onChange={handleChange} />
             <input placeholder="Category"
-            name='catagory'
-            value={edits.catagory}
+            name='category'
+            value={edits.category}
             onChange={handleChange}/>
             <button>Publish</button>
             </form>
@@ -72,4 +57,4 @@ const sendEdits = (_id, edits,) => {
   );
 };
 
-export default EditBlog;
+export default withAuth(withCrud(EditBlog))

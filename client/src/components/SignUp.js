@@ -1,20 +1,21 @@
 import React, {useState} from 'react'
 import { withAuth } from '../context/AuthProvider.js'
 import { Link } from 'react-router-dom'
-// import useMakeBlog from './CustomHooks.js'
-import axios from 'axios'
+
 
 const SignUp = props => {
-    
+    const [hide, setHide] = useState(true)
   
 
     
      
     
-      const { name, email, password, signUp, handleChange, handleSubmit, } = props
+      const { name, email, password,  handleChange, handleSubmit, } = props
       
-         
-    console.log(props)
+      const passwordHider = () => {
+        setHide(hide => (!hide))
+      }
+
     return(
         <div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>
@@ -35,7 +36,7 @@ const SignUp = props => {
                     />
                     <br />
                     <input placeholder="Password"
-                    type='password'
+                    type={hide ? 'password' : '' }
                     name="password"
                     value={password}
                     onChange={handleChange}
@@ -43,6 +44,7 @@ const SignUp = props => {
                     <br />
                     <button onClick={localStorage.getItem('token') !== null ? props.history.push('/allblogposts') : null}>Sign up</button>
                 </form>
+                <button onClick={passwordHider}>{hide ? "show password" : "hide password"}</button>
             </div>
             <div style={{border: '1px solid black', padding: 5, margin: 5, textAlign: 'center'}}>
                 <p>Have an account?</p>

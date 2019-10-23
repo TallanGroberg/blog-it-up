@@ -9,7 +9,6 @@ const Navbar = props => {
         props.logout()
     }
 
-    console.log('nav bar props',props)
     return(
         <div style={{position: 'fixed', border: '1px solid black', padding: 10, bottom: 0, margin: 10}}>
             <>
@@ -19,6 +18,7 @@ const Navbar = props => {
                 <Link to='/allblogposts'>All Blog Posts</Link>
                 <Link to='/publishablogpost'>Publish a Blog Post</Link>
                 <Link to='/favorites'>Favorites</Link>
+                <Link to='/profile'>Profile</Link>
                 <button  onClick={logout}>{localStorage.getItem('token') !== null ? 'logout' :  'login' } </button>
             </nav>
         </div>
