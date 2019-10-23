@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
 import moment from 'moment'
 import axios from 'axios'
-
+import styled from 'styled-components'
 
 
 const Publish = (props) => {
@@ -39,10 +39,9 @@ const Publish = (props) => {
 
 
     return(
-        <div style={{border: '1px solid black', padding: 10, textAlign: 'center'}}>
-            this is the form section for publishing a blog post
-            <br />
-            <form onSubmit={handleSubmit}>
+        <PublishContainer>
+            <PublishTitle>Create a blog post!</PublishTitle>
+            <FormSection onSubmit={handleSubmit}>
             <input placeholder="Title"
                 name='title'
                 value={inputs.title}
@@ -63,9 +62,26 @@ const Publish = (props) => {
             value={inputs.category}
             onChange={handleChange}/>
             <button>Publish</button>
-            </form>
-        </div>
+            </FormSection>
+        </PublishContainer>
     )
 }
 
 export default withAuth(Publish)
+
+
+const PublishContainer = styled.div`
+    color: #A9A9A9;
+    text-align: center;
+`
+
+const PublishTitle = styled.h1`
+    text-transform: uppercase;
+`
+
+const FormSection = styled.form`
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    
+`
