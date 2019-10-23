@@ -1,6 +1,7 @@
 const express = require('express')
 const userRouter = express.Router()
 const User = require('../models/user')
+const Blog = require('../models/blogPost')
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt')
 
@@ -33,7 +34,6 @@ userRouter.put('/:_id', (req,res,next) => {
   const user = req.body
  //1st promise 
   const hashPassword = new Promise((resolve, reject) => {
-
     bcrypt.hash(user.password, 10, (err, hash) => {
       if(err) return next(err);
       user.password = hash;
@@ -53,6 +53,39 @@ userRouter.put('/:_id', (req,res,next) => {
     })
   })
 })
+
+userRouter.get('/:_id/favorites', async (req, res, next) => {
+  try {
+      const user = await User.findOne({_id: req.params._id})
+      const blogPosts = await Blog.find({_id: {$in: user.favorites}})
+      return res.status(200).send(blogPosts)
+  }
+  catch(err){
+      res.status(500)
+      return next(err)
+  }
+  })
+  
+
+
+// post (put?) request to that user's favorites endpoint
+userRouter.put('/:_id/favorites', (req, res, next) => {
+  User.findOneAndUpdate({ _id: req.params._id }, {$push: {favorites: req.body.favorites}}, {new: true}, (err, user) => {
+    if(err) {
+      res.status(500)
+      return next(err)
+    }
+    return res.status(201).send(user)
+  })
+})
+
+
+// delete request to user's favorites endpoint
+
+
+
+
+
 
 
 

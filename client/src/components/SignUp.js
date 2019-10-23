@@ -10,10 +10,16 @@ const SignUp = props => {
     
      
     
-      const { name, email, password,  handleChange, handleSubmit, } = props
+      const { name, email, password, passwordConfirmation, handleChange, handleSubmit, } = props
       
       const passwordHider = () => {
         setHide(hide => (!hide))
+      }
+
+      const checkPassword = (password, passwordConfirmation) => {
+        if(password !== passwordConfirmation){
+            alert('password and password confirmation do not match')
+        }
       }
 
     return(
@@ -39,6 +45,13 @@ const SignUp = props => {
                     type={hide ? 'password' : '' }
                     name="password"
                     value={password}
+                    onChange={handleChange}
+                    />
+
+                    <input placeholder="Confirm Password"
+                    type={hide ? 'password' : '' }
+                    name="passwordConfirmation"
+                    value={passwordConfirmation}
                     onChange={handleChange}
                     />
                     <br />

@@ -19,20 +19,35 @@ class AuthProvider extends Component {
             token:  localStorage.getItem("token") || "",
             name: '',
             email: '',
-            password: ''
+            password: '',
+            passwordConfirmation: '',
         }
     }   
-
     
-        
-        // start of auth features ==========================>
+    
+    
+    // start of auth features ==========================>
     changeUserState = (inputs) => {
-       this.setState(prev => {
-           return {user: inputs,}
-       })
+        this.setState(prev => {
+            return {user: inputs,}
+        })
     }
-
-    logout = () => {
+    
+  
+        signUp = (user) => {
+            
+            //make this thenable return axios
+            
+            axios.post(`/user/signup`, user).then(res => {
+                const { token, user, } = res.data
+                localStorage.setItem("token", token);
+                localStorage.setItem("user", JSON.stringify(user));
+                this.setState({token,user,})
+                //makes it so this function can return data
+                //return res make this tenable receive data
+            }).catch(err => console.log(err)) }
+            
+            logout = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("token");
         this.setState(
@@ -48,17 +63,6 @@ class AuthProvider extends Component {
          })}
     
     
-    signUp = (user) => {
-        //make this thenable return axios
-       axios.post(`/user/signup`, user).then(res => {
-            const { token, user, } = res.data
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(user));
-            this.setState({token,user,})
-            //makes it so this function can return data
-            //return res make this tenable receive data
-            }).catch(err => console.log(err)) }
-    
     handleSubmitForLogin = (e) => {
         e.preventDefault(e)
         const user = { 
@@ -73,6 +77,9 @@ class AuthProvider extends Component {
             password: '',
             
         })) }
+
+        
+
     
     
     handleSubmit = (e) => {
@@ -88,6 +95,7 @@ class AuthProvider extends Component {
             name: '',
             email: '',
             password: '',
+            passwordConfirmation: '',
             
         }))  }
     
@@ -99,7 +107,7 @@ class AuthProvider extends Component {
 
 
     render() {
-        console.log('state in auth provider',this.state)
+    
         return ( 
             <div>
                 <Provider  
@@ -109,6 +117,7 @@ class AuthProvider extends Component {
                         name: this.state.name,
                         email: this.state.email,
                         password: this.state.password,
+                        passwordConfirmation: this.passwordConfirmation,
                         handleChange: this.handleChange,
                         handleSubmit: this.handleSubmit,
                         signUp: this.signUp,

@@ -1,21 +1,27 @@
 import React, {useState} from 'react'
-import { withAuth } from '../context/AuthProvider.js'
+import { withAuth, blogPostAxios } from '../context/AuthProvider.js'
 import axios from 'axios'
 
-const blogPostAxios = axios.create()
-blogPostAxios.interceptors.request.use((config)=>{
-    const token = localStorage.getItem("token");
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
-})
+
 
 const Publish = (props) => {
     const [inputs, setInputs] = useState({})
 
     const handleSubmit = (e) => {
-       
         e.preventDefault()
         blogPostAxios.post('/api/blog', inputs)
+        .then(res => {
+            setInputs(prevState => ({
+                title: '',
+                author: '',
+                date: '',
+                image: '',
+                description: '',
+                category: ''
+            }))
+        })
+        .catch(err => console.log(err))
+        props.history.push('/allblogposts')
     }
 
 
