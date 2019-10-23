@@ -1,18 +1,21 @@
 import React, {useState} from 'react';
-import {withAuth} from '../context/AuthProvider'
+import {withRouter} from 'react-router-dom'
+import {withAuth, blogPostAxios} from '../context/AuthProvider'
 import useFormHandler from './CustomHooks'
+import Axios from 'axios';
 
 //make a method to regrex all the whitespace out of a token 
 
 const EditUser = (props) => {
   const [hide, setHide] = useState(true)
   const [inputs, setInputs] = useState({})
+  const [toggleForDelete] = useState(false)
 
-  const { _id} = props.user
-  const {toggler} = props
+  const { _id, token} = props.user
+  const {toggler, } = props
   const { handleEdit,} = useFormHandler()
 
-console.log('_id in editUser',_id)
+console.log('props in editUser',props)
 
 
   
@@ -32,6 +35,21 @@ console.log('_id in editUser',_id)
 
   const passwordHider = () => {
     setHide(hide => (!hide))
+  }
+  const deleteAccount = (_id) => {
+
+    
+      if(localStorage.getItem('token')) {
+        console.log('the token exists')
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        sendToSignin()
+      }
+
+  }
+
+  const sendToSignin = () => {
+    return props.history.push('/')
   }
 
   return (
@@ -63,11 +81,11 @@ console.log('_id in editUser',_id)
 
       </form>
         <button onClick={passwordHider}>{hide ? 'show password' : "hide password"}</button>
-
+        <button onClick={ () => deleteAccount(_id)}>delete account</button>
 
       <button onClick={toggler}>hide form</button>
     </div>
   );
 };
 
-export default withAuth(EditUser);
+export default withRouter(withAuth(EditUser));

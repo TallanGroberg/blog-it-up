@@ -34,7 +34,6 @@ userRouter.put('/:_id', (req,res,next) => {
   const user = req.body
  //1st promise 
   const hashPassword = new Promise((resolve, reject) => {
-
     bcrypt.hash(user.password, 10, (err, hash) => {
       if(err) return next(err);
       user.password = hash;
