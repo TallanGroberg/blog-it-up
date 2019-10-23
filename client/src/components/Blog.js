@@ -37,16 +37,7 @@ const Blog = props => {
                 <>
                 <EditBlog toggler={toggler} post={post} />
                 <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
-           
-                <button onClick={() => props.deleteBlogPost(post._id)}>Delete</button>
-            </>
-            :
-            <>
-            <EditBlog toggler={toggler} post={post} />
-            <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
-            </>}
-          
-    
+                </>}
 
         </AllBlog>
     )

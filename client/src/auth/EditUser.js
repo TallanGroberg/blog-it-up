@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {withRouter} from 'react-router-dom'
 import {withAuth, blogPostAxios} from '../context/AuthProvider'
 import useFormHandler from './CustomHooks'
+import moment from 'moment'
 import Axios from 'axios';
 
 //make a method to regrex all the whitespace out of a token 
@@ -15,15 +16,13 @@ const EditUser = (props) => {
   const {toggler, } = props
   const { handleEdit,} = useFormHandler()
 
-console.log('props in editUser',props)
+
 
 
   
 
   const handleSubmit = (e) => {
     e.preventDefault()
-   
-    
     props.changeUserState( handleEdit(props.user._id, inputs) )
     toggler()
   }
@@ -40,7 +39,6 @@ console.log('props in editUser',props)
 
     
       if(localStorage.getItem('token')) {
-        console.log('the token exists')
         localStorage.removeItem('token')
         localStorage.removeItem('user')
         sendToSignin()

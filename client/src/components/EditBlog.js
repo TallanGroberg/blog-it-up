@@ -30,19 +30,12 @@ const EditBlog = (props) => {
                 value={edits.title}
                 onChange={handleChange}
                 />
-            <input placeholder="Author"
-            name='author'
-            value={edits.author}
-            onChange={handleChange} />
-            <input placeholder="Date"
-            name='date'
-            value={edits.date}
-            onChange={handleChange} />
+          
             <input placeholder="Image"
             name='image'
             value={edits.image}
             onChange={handleChange} />
-            <input placeholder="Description"
+            <textarea height='100' placeholder="Description"
             name='description'
             value={edits.description}
             onChange={handleChange} />
