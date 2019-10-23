@@ -54,7 +54,6 @@ const Nav = styled.nav`
 
 const NavLink = styled(Link)`
     color: #A9A9A9;
-    line-height: 30px;
     margin-right: 10px;
 `
 
