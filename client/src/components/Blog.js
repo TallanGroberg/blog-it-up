@@ -9,14 +9,9 @@ import '../style/blog.css'
 const Blog = props => {
     
     const [toggle, setToggle] = useState(true)
-    //in this section we have each individual blog post that displays the title, author, published date, image, category. Once a user clicks on the post, it will take us to another page that will allow users to read the full details of the post, edit, delete(if the user created the post, they can delete it. Otherwise they cannot delete the post).
     
     const currentUser = JSON.parse(localStorage.getItem('user'))
     
-    // useEffect(() => {
-    //     props.getFavoriteBlogPosts(currentUser._id)
-    // }, [])
-
     const toggler = () => {
         setToggle(!toggle )
     }

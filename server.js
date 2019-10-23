@@ -30,6 +30,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/blogitupd
 //Routes 
 
 app.use('/api/blog', require('./routes/blogRouter.js'))
+// for all blog posts weather you made them or not
+app.use('/blog', require('./routes/allBlogsRouter.js'))
 app.use('/user', require('./routes/signUpRouter.js'))
 app.use('/auth', require('./routes/userRouter.js'))
 

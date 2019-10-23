@@ -1,6 +1,7 @@
 const express = require('express')
 const userRouter = express.Router()
 const User = require('../models/user')
+const Blog = require('../models/blogPost')
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt')
 
@@ -53,23 +54,23 @@ userRouter.put('/:_id', (req,res,next) => {
   })
 })
 
-
-
-// get request to a user's /favorites endpoint 
-userRouter.get('/:_id/favorites', (req, res, next) => {
-    User.findOne({_id: req.params._id}, (err, user) => {
-      if(err) {
-        res.status(500)
-        return next(err)
-      }
-      return res.status(200).send(user.favorites)
-    })
+userRouter.get('/:_id/favorites', async (req, res, next) => {
+  try {
+      const user = await User.findOne({_id: req.params._id})
+      const blogPosts = await Blog.find({_id: {$in: user.favorites}})
+      return res.status(200).send(blogPosts)
+  }
+  catch(err){
+      res.status(500)
+      return next(err)
+  }
   })
+  
 
 
 // post (put?) request to that user's favorites endpoint
 userRouter.put('/:_id/favorites', (req, res, next) => {
-  User.findOneAndUpdate({ _id: req.params._id }, req.body, {new: true}, (err, user) => {
+  User.findOneAndUpdate({ _id: req.params._id }, {$push: {favorites: req.body.favorites}}, {new: true}, (err, user) => {
     if(err) {
       res.status(500)
       return next(err)
@@ -87,39 +88,6 @@ userRouter.put('/:_id/favorites', (req, res, next) => {
 
 
 
-// TRASH LIVES HERE
-
-// userRouter.get('/:_id/favorites', (req, res, next) => {
-//   User.findOne({_id: req.params._id}, (err, user) => {
-//     if(err) {
-//       res.status(500)
-//       return next(err)
-//     }
-//     return res.status(200).send(user)
-//   })
-// })
-
-
-// userRouter.post('/:_id/favorites', (req, res, next) => {
-//   User.save({_id: req.params._id}, (err, favorite) => {
-//     if(err) {
-//       res.status(500)
-//       return next(err)
-//     }
-//     return res.status(201).send(favorite)
-//   })
-// })
-
-
-// userRouter.delete('/:_id/favorites', (req, res, next) => {
-//   User.findByIdAndRemove({_id: req.params._id}, (err, deletedFavorite) => {
-//     if (err) {
-//       res.status(500)
-//       return next(err)
-//     }
-//     return res.status(200).send(`Successfully deleted ${deletedFavorite}`)
-//   })
-// })
 
 
 module.exports = userRouter
