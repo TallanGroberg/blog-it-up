@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { withAuth } from '../context/AuthProvider.js'
 import EditBlog from './EditBlog'
 import { withCrud } from '../context/CrudProvider.js'
-import '../style/blog.css'
+import styled from 'styled-components'
 
 
 
@@ -17,31 +17,57 @@ const Blog = props => {
     }
 
     const {post} = props
-    return (<>
-        {toggle ? 
-        
+    return (
+        <AllBlog>
+            {toggle ? 
+            
 
-            <> 
-                <h1 className="blogTitle">{post.title}</h1>
-                <p>Written by {post.author}</p>
-                <p>Published date: {post.date}</p>
-                <img src={post.image} alt={post.title} style={{width: 200}}/>
-                <p className='description'>Description: {post.description}</p>
-                <p>Category: {post.category}</p>
-                <button>Read more</button>
-                <button onClick={() => props.putFavoriteBlogPosts(currentUser._id, post)}>Favorite</button>
+                <> 
+                    <BlogTitle>{post.title}</BlogTitle>
+                    <p>Posted by <Author>{post.author}</Author> on <PublishedDate>{post.date}</PublishedDate></p>
+                    <BlogImage src={post.image} alt={post.title}/>
+                    <DisplayDescription>Description: {post.description}</DisplayDescription>
+                    <p>Category: {post.category}</p>
+                    <button>Read more</button>
+                    <button onClick={() => props.putFavoriteBlogPosts(currentUser._id, post)}>Favorite</button>
+                    <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
+                    <button onClick={() => props.deleteBlogPost(post._id)}>Delete</button>
+                </>
+                :
+                <>
+                <EditBlog toggler={toggler} post={post} />
                 <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
-                <button onClick={() => props.deleteBlogPost(post._id)}>Delete</button>
-            </>
-            :
-            <>
-            <EditBlog toggler={toggler} post={post} />
-            <button onClick={toggler}>{!toggle ? 'Cancel' : 'Edit'}</button>
-            </>}
-          
-    
+                </>}
 
-    </>)
+        </AllBlog>
+    )
 }
 
 export default withAuth(withCrud(Blog))
+
+const AllBlog = styled.div`
+    text-align: center;
+    color: #A9A9A9;
+`
+
+const BlogTitle = styled.h1`
+    text-transform: uppercase;
+`
+
+const Author = styled.p`
+    display: inline;
+    font-style: italic;
+`
+
+const PublishedDate = styled.p`
+    display: inline;
+    text-decoration: underline;
+`
+
+const BlogImage = styled.img`
+    width: 200px;
+`
+
+const DisplayDescription = styled.p`
+    display: none;
+`

@@ -12,7 +12,6 @@ import Favorites from './components/Favorites.js'
 import { withCrud } from './context/CrudProvider.js'
 
 
-
 const App = props => {
   const { token } = props
   
