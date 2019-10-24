@@ -6,7 +6,8 @@ const Favorite = props => {
   
     // localStorage.setItem("favorites")
     return(
-        <div>
+        
+        <div style={{textAlign: "center"}}>
             <h1>{props.title}</h1>
             <p>Author: {props.author}</p>
             <p>Published date: {props.date}</p>

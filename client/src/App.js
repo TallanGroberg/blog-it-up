@@ -46,7 +46,7 @@ button {
 	border:1px solid #c4c2c4;
 
 	cursor:pointer;
-	color:#333333;
+	color: #474747;
 	font-size:17px;
 	padding:3px 29px;
 	text-decoration:none;
@@ -62,6 +62,7 @@ button:active {
 	position:relative;
 	top:1px;
 }
+
 `
 
 export default withAuth(withCrud(App))

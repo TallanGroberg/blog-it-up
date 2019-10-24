@@ -31,7 +31,9 @@ const Navbar = props => {
 export default withAuth(Navbar)
 
 const NavContainer = styled.div`
+    
     background-color: #CAEBF2;
+    /* padding: 10px; */
     position: fixed;
     bottom: 0;
     width: 100%;

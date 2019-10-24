@@ -34,7 +34,7 @@ const Blog = props => {
     
 
     const {post} = props
-    console.log('description in blog.js', description)
+  
     return (
         <AllBlog>
             {toggle ? 
@@ -45,7 +45,7 @@ const Blog = props => {
                     <p>Posted by <Author>{post.author}</Author> on <PublishedDate>{post.date}</PublishedDate></p>
                     <BlogImage src={post.image} alt={post.title}/>
                         <Fade top when={description}>
-                            <p>{post.description}</p>
+                            <p id='description' >{post.description}</p>
                         </Fade>
                     <p>Category: {post.category}</p>
                     <button onClick={showDescription} >Read more</button>
@@ -77,6 +77,9 @@ const AllBlog = styled.div`
     
     text-align: center;
     color: #A9A9A9;
+    #description {
+        display: flex;
+    }
     
 `
 
