@@ -53,7 +53,7 @@ const Nav = styled.nav`
 `
 
 const NavLink = styled(Link)`
-    color: #A9A9A9;
+    color: #333333;
     margin-right: 10px;
 `
 

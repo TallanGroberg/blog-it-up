@@ -74,12 +74,15 @@ const Blog = props => {
 export default withAuth(withCrud(Blog))
 
 const AllBlog = styled.div`
+    
     text-align: center;
     color: #A9A9A9;
+    
 `
 
 const BlogTitle = styled.h1`
     text-transform: uppercase;
+    color: #333333;
 `
 
 const Author = styled.p`
@@ -94,8 +97,4 @@ const PublishedDate = styled.p`
 
 const BlogImage = styled.img`
     width: 200px;
-`
-
-const DisplayDescription = styled.p`
-    display: none;
 `
