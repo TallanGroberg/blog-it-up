@@ -53,7 +53,7 @@ const Publish = (props) => {
             name='image'
             value={inputs.image}
             onChange={handleChange} />
-            <textarea height="100" width='150' placeholder="Description"
+            <textarea rows='8' placeholder="Description"
             name='description'
             value={inputs.description}
             onChange={handleChange} />
@@ -61,6 +61,7 @@ const Publish = (props) => {
             name='category'
             value={inputs.category}
             onChange={handleChange}/>
+            <br/>
             <button>Publish</button>
             </FormSection>
         </PublishContainer>
@@ -71,17 +72,23 @@ export default withAuth(Publish)
 
 
 const PublishContainer = styled.div`
+
     color: #A9A9A9;
     text-align: center;
 `
 
 const PublishTitle = styled.h1`
     text-transform: uppercase;
+    color: #333333;
 `
 
 const FormSection = styled.form`
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    
+    text-align: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
 `

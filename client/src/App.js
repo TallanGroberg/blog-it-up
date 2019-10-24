@@ -36,6 +36,7 @@ const App = props => {
 
 const AppWideStyles = styled.div`
 margin-bottom: 25vh;
+text-align: center;
 button:focus{outline: none;}
 button {
 

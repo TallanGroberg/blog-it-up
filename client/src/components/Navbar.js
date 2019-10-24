@@ -55,17 +55,13 @@ const Nav = styled.nav`
 `
 
 const NavLink = styled(Link)`
-    color: #A9A9A9;
+    color: #333333;
     margin-right: 10px;
 `
 
 const LogOutSection = styled.div`
     display: flex;
     float: right;
-<<<<<<< HEAD
-    
-=======
->>>>>>> 3e573106187d152686b764a5c03133f98d56c244
 `
 
 const Button = styled.button`
