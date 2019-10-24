@@ -61,11 +61,12 @@ const NavLink = styled(Link)`
 
 const LogOutSection = styled.div`
     display: flex;
-    float: right;
+    justify-content: center;
 `
 
 const Button = styled.button`
     color: #FF3B3F;
     text-shadow: -.030em .030em #FFF6E6,   -.08em .08em #E7DCD7;
+    margin: 10px 0;
 `
 
