@@ -47,7 +47,7 @@ const SignUp = props => {
                     value={password}
                     onChange={handleChange}
                     />
-
+                    <br />
                     <input placeholder="Confirm Password"
                     type={hide ? 'password' : '' }
                     name="passwordConfirmation"

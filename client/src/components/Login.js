@@ -22,7 +22,7 @@ const Login = (props) => {
                     value={name}
                     onChange={handleChange}
                     />
-                    
+                    <br />
                     <input 
                     placeholder="Email"
                     name='email'
